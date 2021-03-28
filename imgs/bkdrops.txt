@@ -1,0 +1,13 @@
+https://media.giphy.com/media/BHNfhgU63qrks/giphy.gif
+
+space
+https://media.giphy.com/media/OK5LK5zLFfdm/giphy.gif
+
+beach
+https://media.giphy.com/media/l378aUIDVRapQXXfG/giphy.gif
+
+rocket
+  /* background-image: url(https://media.giphy.com/media/chQgJZvUonszkTxYcg/giphy.gif); */
+  /* background-position: 600px 0; */
+  /* background: #0575e6;
+  background: linear-gradient(to right, #021b79, #0575e6); */

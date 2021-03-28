@@ -1,14 +1,19 @@
-const imgArr = ["grapes.png", "orange.png", "real-food.png"];
+const imgArr = [
+  "grapes.png",
+  "orange.png",
+  "real-food.png",
+  "banana.png",
+  "cake.png",
+  "dog.png",
+];
 let sameItem = [];
-let isPair = "";
+const elements = 12;
+let scorekeeper = 0;
 
-const rand = () => {
-  return Math.floor(Math.random() * 5 + 1);
-};
 let board_location = [];
 let arr = [];
-while (arr.length < 6) {
-  let r = Math.floor(Math.random() * 6);
+while (arr.length < elements) {
+  let r = Math.floor(Math.random() * elements);
   if (arr.indexOf(r) === -1) arr.push(r);
 }
 
@@ -32,7 +37,7 @@ var click = new Howl({
 });
 function populateBoard() {
   let game_board = document.querySelector(".game-board");
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < elements; i++) {
     let newDiv = document.createElement("button");
     newDiv.classList.add("card");
     let cardfront = document.createElement("div");
@@ -54,7 +59,7 @@ function populateBoard() {
 
 function populateImages(board) {
   const img_back = document.querySelectorAll(".item-back");
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < elements; i++) {
     for (let k = 0; k < 2; k++) {
       card_location = board[i][1];
       img_back[card_location].src = `imgs/${board[i][0]}`;
@@ -78,6 +83,7 @@ populateImages(board_location);
 const card = document.querySelectorAll(".card");
 const card_front = document.querySelectorAll(".card--front");
 const card_back = document.querySelectorAll(".card--back");
+let score = document.querySelector(".score");
 let count = 0;
 
 for (let i = 0; i < card.length; i++) {
@@ -106,7 +112,7 @@ for (let i = 0; i < card.length; i++) {
         setTimeout(() => {
           sound.play();
         }, 200);
-
+        ++scorekeeper;
         reset(sameItem, card);
       } else {
         sameItem.forEach((card) => {
@@ -120,6 +126,8 @@ for (let i = 0; i < card.length; i++) {
     }
   });
 }
+
+score.innerHTML = "Score: " + scorekeeper;
 
 function reset(card, boardItems) {
   sameItem = [];
@@ -142,6 +150,4 @@ function reset(card, boardItems) {
       }
     });
   }, 1500);
-
-  console.log("currently resetting");
 }

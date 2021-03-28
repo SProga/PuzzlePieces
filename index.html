@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&family=Train+One&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"
       integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ=="
@@ -13,11 +18,22 @@
     <title>jsSandbox | Demo</title>
   </head>
   <body>
-    <div class="game-board"></div>
-
     <div class="center">
       <button class="btn btn--reset">Reset</button>
+      <div class="settings">
+        <h1 class="settings__mode">Choose Mode</h1>
+        <div class="wrapper">
+          <button class="btn--easy">easy</button>
+          <button class="btn--hard">hard</button>
+        </div>
+      </div>
     </div>
+    <div class="game-board"></div>
+    <div class="scorecard">
+      <h1 class="score"></h1>
+    </div>
+
+    <h1 class="title">Puzzle Up</h1>
     <script src="app.js"></script>
   </body>
 </html>
