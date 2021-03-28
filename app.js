@@ -7,7 +7,7 @@ const imgArr = [
   "dog.png",
 ];
 let sameItem = [];
-const elements = 12;
+let elements = 12;
 let scorekeeper = 0;
 
 let board_location = [];
@@ -18,7 +18,7 @@ while (arr.length < elements) {
 }
 
 let counter = 0;
-for (let i = 0; i < imgArr.length; i++) {
+for (let i = 0; i < elements; i++) {
   for (let k = 0; k < 2; k++) {
     board_location.push([imgArr[i], arr[counter]]);
     counter++;
@@ -35,6 +35,12 @@ var click = new Howl({
   src: ["sounds/click.mp3"],
   volume: 0.2,
 });
+
+var mode = new Howl({
+  src: ["sounds/mode.mp3"],
+  volume: 0.2,
+});
+
 function populateBoard() {
   let game_board = document.querySelector(".game-board");
   for (let i = 0; i < elements; i++) {
@@ -77,6 +83,33 @@ const compare = (arr) => {
   }
 };
 
+function updateScore() {
+  score.innerHTML = "Score: " + ++scorekeeper;
+}
+
+function reset(card, boardItems) {
+  sameItem = [];
+  count = 0;
+  setTimeout(() => {
+    card.forEach((c) => {
+      if (
+        c.isPair != true &&
+        c.previousSibling.classList.contains("card--front_active")
+      ) {
+        c.previousSibling.classList.remove("card--front_active");
+      }
+      if (c.isPair != true && c.classList.contains("card--back_active")) {
+        c.classList.remove("card--back_active");
+      }
+    });
+    boardItems.forEach((item) => {
+      if (!item.lastChild.classList.contains("card--back_active")) {
+        item.disabled = false;
+      }
+    });
+  }, 1500);
+}
+
 populateBoard();
 populateImages(board_location);
 
@@ -112,7 +145,7 @@ for (let i = 0; i < card.length; i++) {
         setTimeout(() => {
           sound.play();
         }, 200);
-        ++scorekeeper;
+        updateScore();
         reset(sameItem, card);
       } else {
         sameItem.forEach((card) => {
@@ -127,27 +160,26 @@ for (let i = 0; i < card.length; i++) {
   });
 }
 
-score.innerHTML = "Score: " + scorekeeper;
+/* ALL BUTTON EVENTS  */
+let easybtn = document.querySelector(".btn--easy");
+easybtn.addEventListener("click", easyMode);
 
-function reset(card, boardItems) {
-  sameItem = [];
-  count = 0;
-  setTimeout(() => {
-    card.forEach((c) => {
-      if (
-        c.isPair != true &&
-        c.previousSibling.classList.contains("card--front_active")
-      ) {
-        c.previousSibling.classList.remove("card--front_active");
-      }
-      if (c.isPair != true && c.classList.contains("card--back_active")) {
-        c.classList.remove("card--back_active");
-      }
-    });
-    boardItems.forEach((item) => {
-      if (!item.lastChild.classList.contains("card--back_active")) {
-        item.disabled = false;
-      }
-    });
-  }, 1500);
+let hardbtn = document.querySelector(".btn--hard");
+hardbtn.addEventListener("click", hardMode);
+
+let resetbtn = document.querySelector(".btn");
+resetbtn.addEventListener("click", resetAll);
+
+function resetAll() {
+  // alert("reset mode activated");
+  mode.play();
+}
+
+function easyMode() {
+  mode.play();
+  // alert("easy mode activated");
+}
+function hardMode() {
+  mode.play();
+  // alert("hard mode activated");
 }
