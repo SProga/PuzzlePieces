@@ -107,34 +107,33 @@ function updateScore(scorekeeper, el) {
 
 function reset(card, boardItems) {
   setTimeout(() => {
-    card.forEach((c) => {
-      if (
-        c.isPair != true &&
-        c.previousSibling.classList.contains("card--front_active")
-      ) {
-        c.previousSibling.classList.remove("card--front_active");
-      }
-      if (c.isPair != true && c.classList.contains("card--back_active")) {
-        c.classList.remove("card--back_active");
-        swoosh.play();
-      }
-    });
+    if (totalLives < 0) {
+      boardItems.forEach((item) => {
+        item.disabled = true;
+        fail.play();
+      });
+    } else {
+      card.forEach((c) => {
+        if (
+          c.isPair != true &&
+          c.previousSibling.classList.contains("card--front_active")
+        ) {
+          c.previousSibling.classList.remove("card--front_active");
+        }
+        if (c.isPair != true && c.classList.contains("card--back_active")) {
+          c.classList.remove("card--back_active");
+          swoosh.play();
+        }
+      });
+      boardItems.forEach((item) => {
+        if (!item.lastChild.classList.contains("card--back_active")) {
+          item.disabled = false;
+        }
+      }); //remember setTimeout waits
+      sameItem = [];
+      count = 0;
+    }
   }, 1500);
-
-  if (totalLives < 1) {
-    boardItems.forEach((items) => {
-      items.disabled = true;
-    });
-    fail.play();
-  } else {
-    boardItems.forEach((item) => {
-      if (!item.lastChild.classList.contains("card--back_active")) {
-        item.disabled = false;
-      }
-    });
-    sameItem = [];
-    count = 0;
-  }
 }
 
 function resetAll(prevSettings) {
@@ -143,6 +142,7 @@ function resetAll(prevSettings) {
   life_container.innerHTML = " ";
   scorekeeper = 0;
   totalLives = 3;
+  lives = [];
   updateScore(scorekeeper);
   count = 0;
   sameItem = [];

@@ -136,6 +136,9 @@ body {
   border: none;
   box-shadow: 0 5px 5px rgb(85, 85, 85);
   transition: all 0.2s;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-family: sans-serif;
 }
 
 .btn:hover {
@@ -162,9 +165,11 @@ body {
 }
 .score {
   text-shadow: 0 2px 2px #000;
+  letter-spacing: 2px;
 }
 .title {
   display: flex;
+  letter-spacing: 2px;
   align-items: center;
   gap: 2rem;
   text-align: center;
@@ -197,6 +202,9 @@ body {
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s;
+  font-weight: bold;
+  font-family: sans-serif;
+  letter-spacing: 2px;
 }
 .btn--easy:focus,
 .btn--hard:focus {
@@ -221,6 +229,6 @@ body {
 }
 
 .lifelines {
-  width: 33px;
-  height: 32px;
+  width: 4rem;
+  height: 4rem;
 }
