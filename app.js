@@ -61,6 +61,10 @@ let fail = new Howl({
   src: ["sounds/fail.mp3"],
   volume: 0.05,
 });
+let loseheart = new Howl({
+  src: ["sounds/lose_heart.mp3"],
+  volume: 0.02,
+});
 
 //FUNCTIONS
 
@@ -72,6 +76,7 @@ function removelife() {
   }, 1000);
   setTimeout(function () {
     removed.src = heartImgs[2];
+    loseheart.play();
   }, 2000);
 }
 
