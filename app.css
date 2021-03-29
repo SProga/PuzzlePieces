@@ -14,7 +14,8 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-image: url(https://media.giphy.com/media/BHNfhgU63qrks/giphy.gif);
+  /* background-image: url(https://media.giphy.com/media/BHNfhgU63qrks/giphy.gif); */
+  background-image: url(https://media.giphy.com/media/ZFibRNOSrIdUWgupdc/giphy.gif);
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
@@ -27,24 +28,30 @@ body {
   margin: 2rem auto 0;
   display: flex;
   gap: 2.1rem;
-  justify-content: flex-start;
+  justify-content: center;
+  align-content: flex-start;
   flex-wrap: wrap;
   height: auto;
   padding: 5rem;
+  min-height: 45rem;
 }
 
 .card {
   cursor: pointer;
-  flex: 0 0 20%;
+  flex: 0 0 22%;
   min-width: 9rem;
   position: relative;
   perspective: 150rem;
   -moz-perspective: 150rem;
-  height: 9rem;
+  height: 11rem;
   border: none;
   outline: none;
   border-radius: 2rem;
   background: transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  overflow: hidden;
 }
 .card:focus {
   outline: none;
@@ -63,6 +70,8 @@ body {
   width: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -moz-backface-visibility: hidden;
@@ -111,7 +120,7 @@ body {
 
 .settings {
   margin-right: auto;
-  transform: translateX(-7rem);
+  transform: translateX(-5rem);
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -255,7 +264,7 @@ body {
   }
   .card {
     flex: 0 0 25%;
-    height: 9rem;
+    height: 10rem;
   }
 }
 
