@@ -13,6 +13,26 @@ const heartImgs = [
   "imgs/sprite_h2.png",
   "imgs/sprite_h3.png",
 ];
+const imgArr = [
+  "png/036-ice cream stick.png",
+  "png/001-gift.png",
+  "png/002-pizza.png",
+  "png/003-firecracker.png",
+  "png/010-disco ball.png",
+  "png/004-confetti.png",
+  "png/007-piñata.png",
+  "png/008-silly strings.png",
+  "png/041-lollipop.png",
+  "png/049-burger.png",
+  "png/038-crown.png",
+  "png/034-shaker.png",
+  "png/035-bunny ears.png",
+  "png/045-barbecue.png",
+  "png/030-doughnut.png",
+  "png/032-microphone.png",
+  "png/024-dress.png",
+];
+
 //AUDIO GLOBALS
 let won = new Howl({
   src: ["sounds/congrats.mp3"],
@@ -39,7 +59,7 @@ let swoosh = new Howl({
 
 let fail = new Howl({
   src: ["sounds/fail.mp3"],
-  volume: 0.5,
+  volume: 0.05,
 });
 
 //FUNCTIONS
@@ -79,6 +99,8 @@ function populateBoard(elements) {
 
 function populateImages(board, elements) {
   const img_back = document.querySelectorAll(".item-back");
+
+  //we do it twice the amount because it is a 2d array.
   for (let i = 0; i < elements; i++) {
     for (let k = 0; k < 2; k++) {
       card_location = board[i][1];
@@ -151,15 +173,6 @@ function resetAll(prevSettings) {
 }
 
 function init(items = 12) {
-  const imgArr = [
-    "grapes.png",
-    "orange.png",
-    "real-food.png",
-    "banana.png",
-    "cake.png",
-    "dog.png",
-  ];
-
   for (let i = 0; i < 3; i++) {
     let img = document.createElement("IMG");
     img.classList.add("lifelines");
@@ -169,6 +182,9 @@ function init(items = 12) {
   }
 
   elements = items;
+  let exist = " ";
+  let random = [];
+  let rand = "";
 
   let board_location = [];
   let arr = [];
@@ -178,9 +194,17 @@ function init(items = 12) {
   }
 
   let counter = 0;
-  for (let i = 0; i < elements; i++) {
+  console.log(imgArr);
+  for (let i = 0; i < elements / 2; i++) {
+    do {
+      rand = Math.floor(Math.random() * imgArr.length);
+      exist = random.includes(rand);
+    } while (exist);
+    random.push(rand);
+    console.log(rand);
+
     for (let k = 0; k < 2; k++) {
-      board_location.push([imgArr[i], arr[counter]]);
+      board_location.push([imgArr[rand], arr[counter]]);
       counter++;
     }
   }
@@ -191,6 +215,26 @@ function init(items = 12) {
   const card = document.querySelectorAll(".card");
   const card_front = document.querySelectorAll(".card--front");
   const card_back = document.querySelectorAll(".card--back");
+
+  if (elements > 6) {
+    setTimeout(() => {
+      card_front.forEach((c) => {
+        c.classList.add("card--front_active");
+      });
+      card_back.forEach((c) => {
+        c.classList.add("card--back_active");
+      });
+      setTimeout(() => {
+        card_front.forEach((c) => {
+          c.classList.remove("card--front_active");
+        });
+        card_back.forEach((c) => {
+          c.classList.remove("card--back_active");
+        });
+        swoosh.play();
+      }, 700);
+    }, 500);
+  } //only do this for harder modes
 
   for (let i = 0; i < card.length; i++) {
     card[i].addEventListener("click", (e) => {
@@ -237,13 +281,11 @@ function easyMode(elements) {
   mode.play();
   elements = 6;
   return elements;
-  // alert("easy mode activated");
 }
 function hardMode(elements) {
   mode.play();
   elements = 12;
   return elements;
-  // alert("hard mode activated");
 }
 
 //END OF FUNCTIONS

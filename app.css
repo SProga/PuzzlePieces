@@ -232,3 +232,13 @@ body {
   width: 4rem;
   height: 4rem;
 }
+
+.centered {
+  margin-top: 7rem;
+  text-align: center;
+}
+
+.centered > * {
+  text-align: center;
+  color: #ccc;
+}
