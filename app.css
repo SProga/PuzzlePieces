@@ -23,7 +23,7 @@ body {
 }
 
 .game-board {
-  width: 25%;
+  width: 35%;
   margin: 2rem auto 0;
   display: flex;
   gap: 2.1rem;
@@ -241,4 +241,10 @@ body {
 .centered > * {
   text-align: center;
   color: #ccc;
+}
+
+@media only screen and (min-width: 1600px) {
+  .game-board {
+    width: 25%;
+  }
 }

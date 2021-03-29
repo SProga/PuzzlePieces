@@ -232,7 +232,7 @@ function init(items = 12) {
           c.classList.remove("card--back_active");
         });
         swoosh.play();
-      }, 700);
+      }, 1500);
     }, 500);
   } //only do this for harder modes
 
