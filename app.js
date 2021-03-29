@@ -1,47 +1,38 @@
-const imgArr = [
-  "grapes.png",
-  "orange.png",
-  "real-food.png",
-  "banana.png",
-  "cake.png",
-  "dog.png",
-];
-let sameItem = [];
-let elements = 12;
+//GLOBALS
 let scorekeeper = 0;
+let count = 0;
+let sameItem = [];
+let prevSettings = 12;
+let score = document.querySelector(".score");
 
-let board_location = [];
-let arr = [];
-while (arr.length < elements) {
-  let r = Math.floor(Math.random() * elements);
-  if (arr.indexOf(r) === -1) arr.push(r);
-}
+//
 
-let counter = 0;
-for (let i = 0; i < elements; i++) {
-  for (let k = 0; k < 2; k++) {
-    board_location.push([imgArr[i], arr[counter]]);
-    counter++;
-  }
-}
+//AUDIO GLOBALS
+let won = new Howl({
+  src: ["sounds/congrats.mp3"],
+  volume: 1,
+});
 
-//Sounds
-
-var sound = new Howl({
+let sound = new Howl({
   src: ["sounds/success2.mp3"],
   volume: 0.2,
 });
-var click = new Howl({
+let click = new Howl({
   src: ["sounds/click.mp3"],
   volume: 0.2,
 });
-
-var mode = new Howl({
+let mode = new Howl({
   src: ["sounds/mode.mp3"],
   volume: 0.2,
 });
 
-function populateBoard() {
+let swoosh = new Howl({
+  src: ["sounds/bamboo_swoosh.mp3", "cable_swoosh.mp3", "thick_swoosh.mp3"],
+  volume: 0.2,
+});
+
+//FUNCTIONS
+function populateBoard(elements) {
   let game_board = document.querySelector(".game-board");
   for (let i = 0; i < elements; i++) {
     let newDiv = document.createElement("button");
@@ -63,7 +54,7 @@ function populateBoard() {
   }
 }
 
-function populateImages(board) {
+function populateImages(board, elements) {
   const img_back = document.querySelectorAll(".item-back");
   for (let i = 0; i < elements; i++) {
     for (let k = 0; k < 2; k++) {
@@ -83,13 +74,14 @@ const compare = (arr) => {
   }
 };
 
-function updateScore() {
-  score.innerHTML = "Score: " + ++scorekeeper;
+function updateScore(scorekeeper) {
+  if (scorekeeper === 6) {
+    won.play();
+  }
+  return (score.innerHTML = "Score: " + scorekeeper);
 }
 
 function reset(card, boardItems) {
-  sameItem = [];
-  count = 0;
   setTimeout(() => {
     card.forEach((c) => {
       if (
@@ -100,6 +92,7 @@ function reset(card, boardItems) {
       }
       if (c.isPair != true && c.classList.contains("card--back_active")) {
         c.classList.remove("card--back_active");
+        swoosh.play();
       }
     });
     boardItems.forEach((item) => {
@@ -108,78 +101,129 @@ function reset(card, boardItems) {
       }
     });
   }, 1500);
+
+  sameItem = [];
+  count = 0;
 }
 
-populateBoard();
-populateImages(board_location);
+function resetAll(prevSettings) {
+  let game_board = document.querySelector(".game-board");
+  game_board.innerHTML = " ";
+  scorekeeper = 0;
+  updateScore(scorekeeper);
+  count = 0;
+  sameItem = [];
+  init(prevSettings);
+  mode.play();
+}
 
-const card = document.querySelectorAll(".card");
-const card_front = document.querySelectorAll(".card--front");
-const card_back = document.querySelectorAll(".card--back");
-let score = document.querySelector(".score");
-let count = 0;
+function init(items = 12) {
+  const imgArr = [
+    "grapes.png",
+    "orange.png",
+    "real-food.png",
+    "banana.png",
+    "cake.png",
+    "dog.png",
+  ];
 
-for (let i = 0; i < card.length; i++) {
-  card[i].addEventListener("click", (e) => {
-    click.play();
-    card[i].disabled = true;
-    card_front[i].classList.add("card--front_active");
-    card_back[i].classList.add("card--back_active");
-    count++;
+  let elements = items;
 
-    if (count == 2) {
-      card.forEach((c) => (c.disabled = true));
+  let board_location = [];
+  let arr = [];
+  while (arr.length < elements) {
+    let r = Math.floor(Math.random() * elements);
+    if (arr.indexOf(r) === -1) arr.push(r);
+  }
+
+  let counter = 0;
+  for (let i = 0; i < elements; i++) {
+    for (let k = 0; k < 2; k++) {
+      board_location.push([imgArr[i], arr[counter]]);
+      counter++;
     }
+  }
 
-    let item = "";
-    item = card_back[i];
-    sameItem.push(item);
+  populateBoard(elements);
+  populateImages(board_location, elements);
 
-    console.log(sameItem);
+  const card = document.querySelectorAll(".card");
+  const card_front = document.querySelectorAll(".card--front");
+  const card_back = document.querySelectorAll(".card--back");
 
-    if (sameItem.length == 2) {
-      if (compare(sameItem)) {
-        sameItem.forEach((card) => {
-          card.isPair = true;
-        });
-        setTimeout(() => {
-          sound.play();
-        }, 200);
-        updateScore();
-        reset(sameItem, card);
-      } else {
-        sameItem.forEach((card) => {
-          if (card.isPair != true) {
-            card.isPair = false;
-          }
-        });
+  for (let i = 0; i < card.length; i++) {
+    card[i].addEventListener("click", (e) => {
+      click.play();
+      card[i].disabled = true;
+      card_front[i].classList.add("card--front_active");
+      card_back[i].classList.add("card--back_active");
+      count++;
 
-        reset(sameItem, card);
+      if (count == 2) {
+        card.forEach((c) => (c.disabled = true));
       }
-    }
-  });
+
+      let item = "";
+      item = card_back[i];
+      sameItem.push(item);
+
+      if (sameItem.length == 2) {
+        if (compare(sameItem)) {
+          sameItem.forEach((card) => {
+            card.isPair = true;
+          });
+          setTimeout(() => {
+            sound.play();
+          }, 200);
+          ++scorekeeper;
+          updateScore(scorekeeper);
+          reset(sameItem, card);
+        } else {
+          sameItem.forEach((card) => {
+            if (card.isPair != true) {
+              card.isPair = false;
+              console.dir(card);
+            }
+          });
+          reset(sameItem, card);
+        }
+      }
+    });
+  }
 }
 
-/* ALL BUTTON EVENTS  */
-let easybtn = document.querySelector(".btn--easy");
-easybtn.addEventListener("click", easyMode);
-
-let hardbtn = document.querySelector(".btn--hard");
-hardbtn.addEventListener("click", hardMode);
-
-let resetbtn = document.querySelector(".btn");
-resetbtn.addEventListener("click", resetAll);
-
-function resetAll() {
-  // alert("reset mode activated");
+function easyMode(elements) {
   mode.play();
-}
-
-function easyMode() {
-  mode.play();
+  elements = 6;
+  return elements;
   // alert("easy mode activated");
 }
-function hardMode() {
+function hardMode(elements) {
   mode.play();
+  elements = 12;
+  return elements;
   // alert("hard mode activated");
 }
+
+//END OF FUNCTIONS
+
+//EVENT HANDLERS
+let easybtn = document.querySelector(".btn--easy");
+easybtn.addEventListener("click", () => {
+  prevSettings = easyMode();
+  return resetAll(prevSettings);
+});
+
+let hardbtn = document.querySelector(".btn--hard");
+hardbtn.addEventListener("click", () => {
+  prevSettings = hardMode();
+  return resetAll(prevSettings);
+});
+
+let resetbtn = document.querySelector(".btn");
+resetbtn.addEventListener("click", () => {
+  return resetAll(prevSettings);
+});
+
+//PROGRAM EXECUTION
+init(12);
