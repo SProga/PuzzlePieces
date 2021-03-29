@@ -3,10 +3,16 @@ let scorekeeper = 0;
 let count = 0;
 let sameItem = [];
 let prevSettings = 12;
+let elements = "";
+let totalLives = 3;
 let score = document.querySelector(".score");
-
-//
-
+let lives = [];
+let life_container = document.querySelector(".lives");
+const heartImgs = [
+  "imgs/sprite_h.png",
+  "imgs/sprite_h2.png",
+  "imgs/sprite_h3.png",
+];
 //AUDIO GLOBALS
 let won = new Howl({
   src: ["sounds/congrats.mp3"],
@@ -31,7 +37,24 @@ let swoosh = new Howl({
   volume: 0.2,
 });
 
+let fail = new Howl({
+  src: ["sounds/fail.mp3"],
+  volume: 0.5,
+});
+
 //FUNCTIONS
+
+function removelife() {
+  totalLives--;
+  let removed = lives.pop();
+  setTimeout(function () {
+    removed.src = heartImgs[1];
+  }, 1000);
+  setTimeout(function () {
+    removed.src = heartImgs[2];
+  }, 2000);
+}
+
 function populateBoard(elements) {
   let game_board = document.querySelector(".game-board");
   for (let i = 0; i < elements; i++) {
@@ -74,8 +97,9 @@ const compare = (arr) => {
   }
 };
 
-function updateScore(scorekeeper) {
-  if (scorekeeper === 6) {
+function updateScore(scorekeeper, el) {
+  const toWin = el / 2;
+  if (scorekeeper === toWin) {
     won.play();
   }
   return (score.innerHTML = "Score: " + scorekeeper);
@@ -95,21 +119,30 @@ function reset(card, boardItems) {
         swoosh.play();
       }
     });
+  }, 1500);
+
+  if (totalLives < 1) {
+    boardItems.forEach((items) => {
+      items.disabled = true;
+    });
+    fail.play();
+  } else {
     boardItems.forEach((item) => {
       if (!item.lastChild.classList.contains("card--back_active")) {
         item.disabled = false;
       }
     });
-  }, 1500);
-
-  sameItem = [];
-  count = 0;
+    sameItem = [];
+    count = 0;
+  }
 }
 
 function resetAll(prevSettings) {
   let game_board = document.querySelector(".game-board");
   game_board.innerHTML = " ";
+  life_container.innerHTML = " ";
   scorekeeper = 0;
+  totalLives = 3;
   updateScore(scorekeeper);
   count = 0;
   sameItem = [];
@@ -127,7 +160,15 @@ function init(items = 12) {
     "dog.png",
   ];
 
-  let elements = items;
+  for (let i = 0; i < 3; i++) {
+    let img = document.createElement("IMG");
+    img.classList.add("lifelines");
+    life_container.appendChild(img);
+    img.src = heartImgs[0];
+    lives[i] = img;
+  }
+
+  elements = items;
 
   let board_location = [];
   let arr = [];
@@ -176,16 +217,16 @@ function init(items = 12) {
             sound.play();
           }, 200);
           ++scorekeeper;
-          updateScore(scorekeeper);
+          updateScore(scorekeeper, elements);
           reset(sameItem, card);
         } else {
           sameItem.forEach((card) => {
             if (card.isPair != true) {
               card.isPair = false;
-              console.dir(card);
             }
           });
           reset(sameItem, card);
+          removelife();
         }
       }
     });

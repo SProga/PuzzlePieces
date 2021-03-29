@@ -153,6 +153,9 @@ body {
   box-shadow: 0 5px 5px rgb(15, 15, 15);
 }
 .scorecard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   text-align: left;
   font-size: 2rem;
   color: #ccc;
@@ -215,4 +218,9 @@ body {
 }
 .settings__mode {
   font-size: 4rem;
+}
+
+.lifelines {
+  width: 33px;
+  height: 32px;
 }
