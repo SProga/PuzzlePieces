@@ -23,7 +23,7 @@ body {
 }
 
 .game-board {
-  width: 35%;
+  width: 45%;
   margin: 2rem auto 0;
   display: flex;
   gap: 2.1rem;
@@ -35,7 +35,7 @@ body {
 
 .card {
   cursor: pointer;
-  flex: 0 0 26%;
+  flex: 0 0 20%;
   min-width: 9rem;
   position: relative;
   perspective: 150rem;
@@ -55,12 +55,14 @@ body {
   position: absolute;
   border: 1px solid #ccc;
   border-radius: 2rem;
-  height: 10rem;
-  /* width: 9rem; */
+  height: 100%;
   overflow: hidden;
   transition: all 0.8s ease;
   top: 0;
   left: 0;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -moz-backface-visibility: hidden;
@@ -97,10 +99,11 @@ body {
 .center,
 .scorecard {
   width: 55%;
-  margin: 3rem auto 0;
+  margin: 0 auto 0;
 }
 
 .center {
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,7 +111,7 @@ body {
 
 .settings {
   margin-right: auto;
-  transform: translateX(-9rem);
+  transform: translateX(-7rem);
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -236,6 +239,9 @@ body {
 .centered {
   margin-top: 7rem;
   text-align: center;
+  margin-top: -0.2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .centered > * {
@@ -245,6 +251,37 @@ body {
 
 @media only screen and (min-width: 1600px) {
   .game-board {
-    width: 25%;
+    width: 28%;
+  }
+  .card {
+    flex: 0 0 25%;
+    height: 9rem;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .center {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .btn {
+    transform: translateX(0);
+    margin-left: 9rem;
+  }
+  .settings {
+    margin: 0 auto;
+    justify-content: center;
+    transform: translateX(0);
+  }
+  .game-board {
+    width: 100%;
+    min-width: 50rem;
+    height: auto;
+    flex-wrap: wrap;
+  }
+  .card {
+    flex: 0 0 25%;
+    height: 14rem;
   }
 }
