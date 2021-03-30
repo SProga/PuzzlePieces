@@ -31,6 +31,12 @@ const imgArr = [
   "png/030-doughnut.png",
   "png/032-microphone.png",
   "png/024-dress.png",
+  "png/009-synthesizer.png",
+  "png/031-taco.png",
+  "png/040-bell.png",
+  "png/022-birthday cake.png",
+  "png/016-lemonade.png",
+  "png/013-clock.png",
 ];
 
 //AUDIO GLOBALS
@@ -65,6 +71,13 @@ let loseheart = new Howl({
   src: ["sounds/lose_heart.mp3"],
   volume: 0.02,
 });
+
+let playstate = new Howl({
+  src: ["sounds/idea.ogg"],
+  volume: 0.1,
+  loop: true,
+});
+let vol = document.querySelector(".tg");
 
 //FUNCTIONS
 
@@ -127,6 +140,11 @@ const compare = (arr) => {
 function updateScore(scorekeeper, el) {
   const toWin = el / 2;
   if (scorekeeper === toWin) {
+    const vol = playstate.volume();
+    setTimeout(() => {
+      playstate.volume(vol);
+    }, 1500);
+    playstate.volume(0);
     won.play();
   }
   return (score.innerHTML = "Score: " + scorekeeper);
@@ -137,8 +155,13 @@ function reset(card, boardItems) {
     if (totalLives < 0) {
       boardItems.forEach((item) => {
         item.disabled = true;
-        fail.play();
       });
+      const vol = playstate.volume();
+      setTimeout(() => {
+        playstate.volume(vol);
+      }, 3000);
+      playstate.volume(0);
+      fail.play();
     } else {
       card.forEach((c) => {
         if (
@@ -312,6 +335,16 @@ let resetbtn = document.querySelector(".btn");
 resetbtn.addEventListener("click", () => {
   return resetAll(prevSettings);
 });
-
+vol.addEventListener("click", () => {
+  if (vol.classList.contains("fa-volume-up")) {
+    vol.classList.remove("fa-volume-up");
+    vol.classList.add("fa-volume-mute");
+    playstate.stop();
+  } else {
+    vol.classList.add("fa-volume-up");
+    vol.classList.remove("fa-volume-mute");
+    playstate.play();
+  }
+});
 //PROGRAM EXECUTION
 init(12);
