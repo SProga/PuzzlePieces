@@ -24,7 +24,7 @@ body {
 }
 
 .game-board {
-  width: 45%;
+  width: 55%;
   margin: 2rem auto 0;
   display: flex;
   gap: 2.1rem;
@@ -39,7 +39,7 @@ body {
 .card {
   cursor: pointer;
   flex: 0 0 22%;
-  min-width: 9rem;
+  min-width: 12rem;
   position: relative;
   perspective: 150rem;
   -moz-perspective: 150rem;
@@ -260,7 +260,7 @@ body {
 
 @media only screen and (min-width: 1600px) {
   .game-board {
-    width: 28%;
+    width: 30%;
   }
   .card {
     flex: 0 0 25%;
