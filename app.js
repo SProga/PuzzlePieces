@@ -8,6 +8,7 @@ let totalLives = 3;
 let score = document.querySelector(".score");
 let lives = [];
 let life_container = document.querySelector(".lives");
+
 const heartImgs = [
   "imgs/sprite_h.png",
   "imgs/sprite_h2.png",
@@ -229,7 +230,6 @@ function init(items = 12) {
       exist = random.includes(rand);
     } while (exist);
     random.push(rand);
-    console.log(rand);
 
     for (let k = 0; k < 2; k++) {
       board_location.push([imgArr[rand], arr[counter]]);
@@ -259,8 +259,18 @@ function init(items = 12) {
         card_back.forEach((c) => {
           c.classList.remove("card--back_active");
         });
+        setTimeout(() => {
+          card.forEach((card) => {
+            card.disabled = false;
+            console.log(card);
+          });
+        }, 500);
         swoosh.play();
       }, 1500);
+      card.forEach((card) => {
+        card.disabled = true;
+        console.log(card);
+      });
     }, 500);
   } //only do this for harder modes
 
