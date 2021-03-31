@@ -316,7 +316,8 @@ body {
 }
 
 .game_notice--won,
-.last_notice {
+.last_notice,
+.accuracy {
   display: inline-block;
   background: #56ccf2; /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
@@ -366,6 +367,11 @@ body {
   font-weight: 300;
   font-style: italic;
   color: #b3afaf;
+}
+
+.accuracy {
+  font-size: 3rem;
+  font-weight: 500;
 }
 
 @media only screen and (min-width: 100em) {

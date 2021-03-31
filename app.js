@@ -8,6 +8,10 @@ let totalLives = 3;
 let score = document.querySelector(".score");
 let lives = [];
 let life_container = document.querySelector(".lives");
+let accuracy = document.querySelector(".accuracy");
+let numMoves = 0;
+let totalCorrect = 0;
+let correct = "";
 
 const heartImgs = [
   "imgs/sprite_h.png",
@@ -88,7 +92,6 @@ let vol = document.querySelector(".tg");
 
 function removelife() {
   totalLives--; //take one from the total lives
-  console.log(totalLives);
   if (totalLives >= 0) {
     let notice = document.querySelector(".last_notice");
     notice.innerHTML = "-1 Life";
@@ -103,7 +106,6 @@ function removelife() {
       notice.classList.remove("fadeUp");
 
       if (totalLives === 0) {
-        console.log(totalLives);
         setTimeout(() => {
           let notice = document.querySelector(".last_notice");
           notice.innerHTML = "Last Life";
@@ -170,7 +172,25 @@ function updateScore(scorekeeper, el) {
     wonBanner.innerHTML = "YOU WON!";
     won.play();
   }
-  return (score.innerHTML = "Score: " + scorekeeper);
+
+  score.innerHTML = "Score: " + scorekeeper;
+}
+
+function updateAccuracy() {
+  const total = numMoves;
+  let numRatio = "";
+  let percentage = "";
+  let percentage_floor = "";
+
+  console.log(total);
+
+  if (correct === true) {
+    totalCorrect++;
+  }
+  numRatio = totalCorrect / total;
+  percentage = numRatio * 100;
+  percentage_floor = Math.floor(percentage);
+  accuracy.innerHTML = "Accuracy: " + percentage_floor + "%";
 }
 
 function reset(card, boardItems) {
@@ -218,7 +238,7 @@ function resetAll(prevSettings, lifelines) {
   scorekeeper = 0;
   totalLives = lifelines;
   lives = [];
-  updateScore(scorekeeper);
+  updateScore(scorekeeper, prevSettings);
   count = 0;
   sameItem = [];
   init(prevSettings);
@@ -230,6 +250,9 @@ function resetAll(prevSettings, lifelines) {
   let lostBanner = document.querySelector(".game_notice--lost");
   wonBanner.innerHTML = "";
   lostBanner.innerHTML = "";
+  numMoves = 0;
+  totalCorrect = 0;
+  accuracy.innerHTML = "Accuracy: " + totalCorrect + "%";
 }
 
 function init(items = 12) {
@@ -302,6 +325,7 @@ function init(items = 12) {
       sameItem.push(item);
 
       if (sameItem.length == 2) {
+        ++numMoves;
         if (compare(sameItem)) {
           sameItem.forEach((card) => {
             card.parentNode.classList.add("scale");
@@ -314,6 +338,7 @@ function init(items = 12) {
             sound.play();
           }, 200);
           ++scorekeeper;
+          correct = true;
           updateScore(scorekeeper, elements);
           reset(sameItem, card);
         } else {
@@ -324,14 +349,15 @@ function init(items = 12) {
           });
           reset(sameItem, card);
           removelife();
+          correct = false;
         }
+        updateAccuracy();
       }
     });
   }
 }
 
 function turnCards(delay, card, card_front, card_back) {
-  // console.log(delay);
   setTimeout(() => {
     card_front.forEach((c) => {
       c.classList.add("card--front_active");
