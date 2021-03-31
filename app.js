@@ -187,12 +187,12 @@ function reset(card, boardItems) {
   }, 1500);
 }
 
-function resetAll(prevSettings) {
+function resetAll(prevSettings, lifelines) {
   let game_board = document.querySelector(".game-board");
   game_board.innerHTML = " ";
   life_container.innerHTML = " ";
   scorekeeper = 0;
-  totalLives = 3;
+  totalLives = lifelines;
   lives = [];
   updateScore(scorekeeper);
   count = 0;
@@ -202,7 +202,7 @@ function resetAll(prevSettings) {
 }
 
 function init(items = 12) {
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < totalLives; i++) {
     let img = document.createElement("IMG");
     img.classList.add("lifelines");
     life_container.appendChild(img);
@@ -223,7 +223,7 @@ function init(items = 12) {
   }
 
   let counter = 0;
-  console.log(imgArr);
+
   for (let i = 0; i < elements / 2; i++) {
     do {
       rand = Math.floor(Math.random() * imgArr.length);
@@ -262,14 +262,14 @@ function init(items = 12) {
         setTimeout(() => {
           card.forEach((card) => {
             card.disabled = false;
-            console.log(card);
+            // console.log(card);
           });
         }, 500);
         swoosh.play();
       }, 1500);
       card.forEach((card) => {
         card.disabled = true;
-        console.log(card);
+        // console.log(card);
       });
     }, 500);
   } //only do this for harder modes
@@ -317,34 +317,48 @@ function init(items = 12) {
 
 function easyMode(elements) {
   mode.play();
-  elements = 6;
+  elements = 12;
   return elements;
 }
 function hardMode(elements) {
   mode.play();
-  elements = 12;
+  elements = 18;
+  return elements;
+}
+function expertMode(elements) {
+  mode.play();
+  elements = 24;
   return elements;
 }
 
 //END OF FUNCTIONS
 
 //EVENT HANDLERS
+let lifelines = "";
 let easybtn = document.querySelector(".btn--easy");
 easybtn.addEventListener("click", () => {
   prevSettings = easyMode();
-  return resetAll(prevSettings);
+  lifelines = 3;
+  return resetAll(prevSettings, lifelines);
 });
 
 let hardbtn = document.querySelector(".btn--hard");
 hardbtn.addEventListener("click", () => {
   prevSettings = hardMode();
-  return resetAll(prevSettings);
+  lifelines = 5;
+  return resetAll(prevSettings, lifelines);
 });
-
+let expertbtn = document.querySelector(".btn--expert");
+expertbtn.addEventListener("click", () => {
+  prevSettings = expertMode();
+  lifelines = 7;
+  return resetAll(prevSettings, lifelines);
+});
 let resetbtn = document.querySelector(".btn");
 resetbtn.addEventListener("click", () => {
   return resetAll(prevSettings);
 });
+
 vol.addEventListener("click", () => {
   if (vol.classList.contains("fa-volume-up")) {
     vol.classList.remove("fa-volume-up");
@@ -357,4 +371,4 @@ vol.addEventListener("click", () => {
   }
 });
 //PROGRAM EXECUTION
-init(12);
+init(10);
