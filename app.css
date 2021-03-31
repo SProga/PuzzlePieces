@@ -18,7 +18,6 @@ html {
 body {
   box-sizing: border-box;
   margin: 0;
-  min-height: 100vh;
   padding: 0;
   /* background-image: url(https://media.giphy.com/media/BHNfhgU63qrks/giphy.gif); */
   background-image: url(https://media.giphy.com/media/ZFibRNOSrIdUWgupdc/giphy.gif);
@@ -26,6 +25,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   font-family: "Train One", cursive;
+  overflow-x: hidden;
   color: #ccc;
 }
 
@@ -39,7 +39,7 @@ body {
   flex-wrap: wrap;
   height: auto;
   padding: 5rem;
-  min-height: 45rem;
+  /* min-height: 45rem; */
 }
 
 .card {
@@ -289,6 +289,193 @@ body {
 
 .scale {
   transform: scale(1.1);
+}
+
+.last_notice {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  transform: translateY(0);
+}
+.fadeUp {
+  -webkit-animation: fadeUp 3s linear;
+  animation: fadeUp 3s linear;
+  -webkit-animation-fill-mode: backwards;
+  animation-fill-mode: backwards;
+}
+.fadeUpShow {
+  -webkit-animation: fadeUpShow 0.5s linear;
+  animation: fadeUpShow 0.5s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.game_notice--won,
+.last_notice {
+  display: inline-block;
+  background: #56ccf2; /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2f80ed,
+    #56ccf2
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.game_notice-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.game_notice--won {
+  text-align: center;
+  font-size: 10rem;
+  -webkit-animation: pulsate-won 3s infinite;
+  animation: pulsate-won 3s infinite;
+}
+.game_notice--lost {
+  display: inline-block;
+  font-size: 10rem;
+  -webkit-animation: pulsate-lost 3s infinite;
+  animation: pulsate-lost 3s infinite;
+  background: #cb356b; /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #bd3f32,
+    #cb356b
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@-webkit-keyframes pulsate-won {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+    text-shadow: 0 3px 3px #56ccf2;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+    text-shadow: 0 3px 10px #1de9b6;
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+    text-shadow: 0 3px 3px #56ccf2;
+  }
+}
+
+@keyframes pulsate-won {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+    text-shadow: 0 3px 3px #56ccf2;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+    text-shadow: 0 3px 10px #1de9b6;
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+    text-shadow: 0 3px 3px #56ccf2;
+  }
+}
+
+@-webkit-keyframes pulsate-lost {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+    text-shadow: 0 3px 3px #ec540d;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+    text-shadow: 0 3px 10px #eb726e;
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+    text-shadow: 0 3px 3px #ec540d;
+  }
+}
+
+@keyframes pulsate-lost {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+    text-shadow: 0 3px 3px #ec540d;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+    text-shadow: 0 3px 10px #eb726e;
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+    text-shadow: 0 3px 3px #ec540d;
+  }
+}
+
+@-webkit-keyframes fadeUp {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-3rem);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-3rem);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes fadeUpShow {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-3rem);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUpShow {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  100% {
+    transform: translateY(-3rem);
+    opacity: 1;
+  }
 }
 
 @media only screen and (min-width: 1600px) {

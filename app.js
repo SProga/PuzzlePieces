@@ -56,30 +56,30 @@ let sound = new Howl({
 });
 let click = new Howl({
   src: ["sounds/click.mp3"],
-  volume: 0.2,
+  volume: 1,
 });
 let mode = new Howl({
   src: ["sounds/mode.mp3"],
-  volume: 0.2,
+  volume: 1,
 });
 
 let swoosh = new Howl({
   src: ["sounds/bamboo_swoosh.mp3", "cable_swoosh.mp3", "thick_swoosh.mp3"],
-  volume: 0.2,
+  volume: 1,
 });
 
 let fail = new Howl({
   src: ["sounds/fail.mp3"],
-  volume: 0.05,
+  volume: 1,
 });
 let loseheart = new Howl({
   src: ["sounds/lose_heart.mp3"],
-  volume: 0.02,
+  volume: 0.7,
 });
 
 let playstate = new Howl({
   src: ["sounds/idea.ogg"],
-  volume: 0.1,
+  volume: 1,
   loop: true,
 });
 let vol = document.querySelector(".tg");
@@ -88,14 +88,30 @@ let vol = document.querySelector(".tg");
 
 function removelife() {
   totalLives--; //take one from the total lives
-  let removed = lives.pop(); //remove the life from the array
-  setTimeout(function () {
-    removed.src = heartImgs[1]; //after the first second show image 1
-  }, 1000);
-  setTimeout(function () {
-    removed.src = heartImgs[2]; //after the second second show image 2
-    loseheart.play();
-  }, 2000); //this setTimeout creates an animation of the heart being removed
+  console.log(totalLives);
+  if (totalLives >= 0) {
+    let notice = document.querySelector(".last_notice");
+    notice.innerHTML = "-1 Life";
+    notice.classList.add("fadeUp");
+    let removed = lives.pop(); //remove the life from the array
+    setTimeout(function () {
+      removed.src = heartImgs[1]; //after the first second show image 1
+    }, 1000);
+    setTimeout(function () {
+      removed.src = heartImgs[2]; //after the second second show image 2
+      loseheart.play();
+      notice.classList.remove("fadeUp");
+
+      if (totalLives === 0) {
+        console.log(totalLives);
+        setTimeout(() => {
+          let notice = document.querySelector(".last_notice");
+          notice.innerHTML = "Last Life";
+          notice.classList.add("fadeUpShow");
+        }, 500);
+      }
+    }, 2000); //this setTimeout creates an animation of the heart being removed
+  }
 }
 
 function populateBoard(elements) {
@@ -150,6 +166,8 @@ function updateScore(scorekeeper, el) {
       playstate.volume(vol);
     }, 1500);
     playstate.volume(0);
+    let wonBanner = document.querySelector(".game_notice--won");
+    wonBanner.innerHTML = "YOU WON!";
     won.play();
   }
   return (score.innerHTML = "Score: " + scorekeeper);
@@ -167,6 +185,8 @@ function reset(card, boardItems) {
       }, 3000);
       playstate.volume(0);
       fail.play();
+      let lostBanner = document.querySelector(".game_notice--lost");
+      lostBanner.innerHTML = "YOU LOST!";
     } else {
       card.forEach((c) => {
         if (
@@ -203,6 +223,13 @@ function resetAll(prevSettings, lifelines) {
   sameItem = [];
   init(prevSettings);
   mode.play();
+  let notice = document.querySelector(".last_notice");
+  notice.innerHTML = "";
+  notice.classList.remove("fadeUpShow");
+  let wonBanner = document.querySelector(".game_notice--won");
+  let lostBanner = document.querySelector(".game_notice--lost");
+  wonBanner.innerHTML = "";
+  lostBanner.innerHTML = "";
 }
 
 function init(items = 12) {
