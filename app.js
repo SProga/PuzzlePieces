@@ -11,7 +11,10 @@ let life_container = document.querySelector(".lives");
 let accuracy = document.querySelector(".accuracy");
 let numMoves = 0;
 let totalCorrect = 0;
+let tm = 0;
+let time = 0;
 let correct = "";
+let countdowntxt = document.querySelector(".countdown__text");
 
 const heartImgs = [
   "imgs/sprite_h.png",
@@ -89,6 +92,13 @@ let playstate = new Howl({
 let vol = document.querySelector(".tg");
 
 //FUNCTIONS
+function countDown() {
+  n--;
+  if (n == 0) {
+    clearInterval(tm);
+  }
+  console.log(n);
+}
 
 function removelife() {
   totalLives--; //take one from the total lives
@@ -252,6 +262,8 @@ function resetAll(prevSettings, lifelines) {
   lostBanner.innerHTML = "";
   numMoves = 0;
   totalCorrect = 0;
+  time = 0;
+  tm = 0;
   accuracy.innerHTML = "Accuracy: " + totalCorrect + "%";
 }
 
@@ -376,21 +388,30 @@ function turnCards(delay, card, card_front, card_back) {
         card.forEach((card) => {
           card.disabled = false; //make the card clickable again
           card.classList.remove("disabled"); //remove the not-allowed css property from the card.
+          let allbtn = document.querySelectorAll(".btn");
+          allbtn.forEach((btn) => {
+            btn.classList.remove("disabled");
+            btn.disabled = false;
+          }); //after first delay this second delay callback :- makes each card clickable again
           setTimeout(() => {
-            let allbtn = document.querySelectorAll(".btn");
-            allbtn.forEach((btn) => {
-              btn.classList.remove("disabled");
-              btn.disabled = false;
-            }, 3500); //after first delay this second delay callback :- makes each card clickable again
-          });
-        });
+            countdowntxt.innerHTML = "";
+            countdowntxt.classList.remove("fadeOut");
+            countdowntxt.style.removeProperty("color");
+          }, 1000);
+        }, 500);
+        countdowntxt.classList.add("fadeOut");
       }, 500);
       swoosh.play();
+      countdowntxt.innerHTML = "GO !";
+      countdowntxt.style.color = "#64FFDA";
     }, delay);
     card.forEach((card) => {
       card.disabled = true;
       card.classList.add("disabled");
     });
+    let floorTime = delay / 1000;
+    time = Math.floor(floorTime);
+    tm = setInterval(countDown, 1000);
   }, 500); //disable every card
 }
 
@@ -418,6 +439,13 @@ function disableSpam() {
   });
 } //this function prevents the user from continuously clicking a button to reset or change
 //the mode after clicking the button first time i.e delay between clicks
+function countDown() {
+  time--;
+  if (time == 0) {
+    clearInterval(tm);
+  }
+  countdowntxt.innerHTML = time;
+}
 //END OF FUNCTIONS
 
 //EVENT HANDLERS

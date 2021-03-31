@@ -122,12 +122,31 @@ body {
 .center {
   margin-top: 1rem;
   display: flex;
+  flex: wrap;
   justify-content: center;
   align-items: center;
 }
-
+.countdown {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: -7rem;
+  display: flex;
+  width: 55%;
+  margin: 1rem auto 0;
+  text-align: center;
+}
+.countdown__text {
+  font-size: 5rem;
+  opacity: 1;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
 .settings {
+  position: relative;
   margin-right: auto;
+  margin-bottom: 0.5rem;
   transform: translateX(-5rem);
   display: flex;
   flex-wrap: wrap;
@@ -314,7 +333,12 @@ body {
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
-
+.fadeOut {
+  -webkit-animation: fadeOut 2s linear;
+  animation: fadeOut 2s linear;
+  -webkit-animation-fill-mode: backwards;
+  animation-fill-mode: backwards;
+}
 .game_notice--won,
 .last_notice,
 .accuracy {
