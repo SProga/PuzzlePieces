@@ -368,7 +368,7 @@ body {
   color: #b3afaf;
 }
 
-@media only screen and (min-width: 1600px) {
+@media only screen and (min-width: 100em) {
   .game-board {
     width: 50%;
   }
@@ -379,7 +379,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 75em) {
   .center {
     position: relative;
     width: 100%;
@@ -415,7 +415,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 50em) {
   .scorecard {
     flex-direction: column;
     gap: 2rem;
