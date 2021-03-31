@@ -53,6 +53,7 @@ body {
   -moz-backface-visibility: hidden;
   overflow: hidden;
   min-width: 10rem;
+  transition: transform 1s;
 }
 .card:focus {
   outline: none;
@@ -98,12 +99,12 @@ body {
 }
 .card--front_active {
   transform: rotateY(-180deg);
-  background: rgb(248, 248, 248);
+  background: rgb(200, 200, 200);
 }
 
 .card--back_active {
   transform: rotateY(0);
-  background: rgb(248, 248, 248);
+  background: rgb(200, 200, 200);
 }
 .center,
 .scorecard {
@@ -279,6 +280,10 @@ body {
 
 .disabled {
   cursor: not-allowed;
+}
+
+.scale {
+  transform: scale(1.1);
 }
 
 @media only screen and (min-width: 1600px) {

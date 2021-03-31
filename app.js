@@ -305,7 +305,11 @@ function init(items = 12) {
       if (sameItem.length == 2) {
         if (compare(sameItem)) {
           sameItem.forEach((card) => {
+            card.parentNode.classList.add("scale");
             card.isPair = true;
+            setTimeout(() => {
+              card.parentNode.classList.remove("scale");
+            }, 1000);
           });
           setTimeout(() => {
             sound.play();
@@ -386,7 +390,7 @@ vol.addEventListener("click", () => {
   if (vol.classList.contains("fa-volume-up")) {
     vol.classList.remove("fa-volume-up");
     vol.classList.add("fa-volume-mute");
-    playstate.stop();
+    playstate.pause();
   } else {
     vol.classList.add("fa-volume-up");
     vol.classList.remove("fa-volume-mute");
@@ -394,4 +398,4 @@ vol.addEventListener("click", () => {
   }
 });
 //PROGRAM EXECUTION
-init(10);
+init(12);
