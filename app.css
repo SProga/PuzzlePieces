@@ -9,16 +9,17 @@
 html {
   font-size: 62.5%;
 }
+
 body {
-  font-family: "Monoton", cursive;
   box-sizing: border-box;
   margin: 0;
+  min-height: 100vh;
   padding: 0;
   /* background-image: url(https://media.giphy.com/media/BHNfhgU63qrks/giphy.gif); */
   background-image: url(https://media.giphy.com/media/ZFibRNOSrIdUWgupdc/giphy.gif);
   background-size: cover;
   background-position: center;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   font-family: "Train One", cursive;
   color: #ccc;
 }
@@ -39,7 +40,6 @@ body {
 .card {
   cursor: pointer;
   flex: 0 0 13%;
-  /* min-width: 12rem; */
   position: relative;
   perspective: 150rem;
   -moz-perspective: 150rem;
@@ -52,6 +52,7 @@ body {
   backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   overflow: hidden;
+  min-width: 10rem;
 }
 .card:focus {
   outline: none;
@@ -284,7 +285,7 @@ body {
   .card {
     flex: 0 0 14%;
     height: 11.5rem;
-    max-width: 30rem;
+    /* max-width: 30rem; */
   }
 }
 
@@ -294,24 +295,24 @@ body {
     flex-direction: column;
     align-items: center;
   }
-  .btn {
-    transform: translateX(0);
-    margin-left: 9rem;
-  }
+
   .settings {
+    transform: translateX(0.5rem);
     margin: 0 auto;
     justify-content: center;
-    transform: translateX(0);
   }
   .game-board {
     width: 80%;
-    min-width: 50rem;
     height: auto;
     flex-wrap: wrap;
     gap: 3rem;
   }
   .card {
     flex: 0 0 17%;
+  }
+
+  .btn {
+    transform: translateX(160%);
   }
 }
 
@@ -333,6 +334,51 @@ body {
   .fa-volume-mute,
   .fa-volume-up {
     top: 3rem;
+    right: -2rem;
+  }
+}
+
+@media only screen and (max-width: 31.25em) {
+  .game-board {
+    width: 90%;
+    gap: 1rem;
+  }
+  .card {
+    flex: 0 0 33%;
+  }
+  .center {
+    position: relative;
+  }
+  .btn {
+    position: absolute;
+    top: 0;
+    left: 37.5%;
+    transform: translateX(0);
+  }
+
+  .settings {
+    margin-right: 0;
+    margin: 15rem auto 0;
+  }
+  .fa-volume-mute,
+  .fa-volume-up {
+    top: 3rem;
+    right: 0;
+  }
+
+  .title {
+    display: flex;
+    letter-spacing: 2px;
+    align-items: center;
+    gap: 0;
+    text-align: center;
+    font-size: 7rem;
+    justify-content: center;
+    text-shadow: 0 2px 2px #000;
+  }
+  .fa-volume-mute,
+  .fa-volume-up {
+    top: 11rem;
     right: -2rem;
   }
 }
