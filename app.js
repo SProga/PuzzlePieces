@@ -87,15 +87,15 @@ let vol = document.querySelector(".tg");
 //FUNCTIONS
 
 function removelife() {
-  totalLives--;
-  let removed = lives.pop();
+  totalLives--; //take one from the total lives
+  let removed = lives.pop(); //remove the life from the array
   setTimeout(function () {
-    removed.src = heartImgs[1];
+    removed.src = heartImgs[1]; //after the first second show image 1
   }, 1000);
   setTimeout(function () {
-    removed.src = heartImgs[2];
+    removed.src = heartImgs[2]; //after the second second show image 2
     loseheart.play();
-  }, 2000);
+  }, 2000); //this setTimeout creates an animation of the heart being removed
 }
 
 function populateBoard(elements) {
@@ -140,7 +140,7 @@ const compare = (arr) => {
   } else {
     return true;
   }
-};
+}; //check to see if the cards last children passed in are the same which is the card_back class
 
 function updateScore(scorekeeper, el) {
   const toWin = el / 2;
@@ -248,42 +248,14 @@ function init(items = 12) {
   const card_front = document.querySelectorAll(".card--front");
   const card_back = document.querySelectorAll(".card--back");
 
-  if (elements > 6) {
-    //CALLBACK HELLLLLLLLLLLLLLLLLL NEEDS TO BE REFACTORED
-    setTimeout(() => {
-      card_front.forEach((c) => {
-        c.classList.add("card--front_active");
-      });
-      card_back.forEach((c) => {
-        c.classList.add("card--back_active");
-      });
-      setTimeout(() => {
-        card_front.forEach((c) => {
-          c.classList.remove("card--front_active");
-        });
-        card_back.forEach((c) => {
-          c.classList.remove("card--back_active");
-        });
-        setTimeout(() => {
-          card.forEach((card) => {
-            card.disabled = false;
-            card.classList.remove("disabled");
-            setTimeout(() => {
-              let allbtn = document.querySelectorAll(".btn");
-              allbtn.forEach((btn) => {
-                btn.classList.remove("disabled");
-                btn.disabled = false;
-              }, 3500);
-            });
-          });
-        }, 500);
-        swoosh.play();
-      }, 1500);
-      card.forEach((card) => {
-        card.disabled = true;
-        card.classList.add("disabled");
-      });
-    }, 500);
+  if (elements === 12) {
+    turnCards(3500, card, card_front, card_back);
+  }
+  if (elements === 18) {
+    turnCards(5500, card, card_front, card_back);
+  }
+  if (elements >= 24) {
+    turnCards(7500, card, card_front, card_back);
   } //only do this for harder modes
 
   for (let i = 0; i < card.length; i++) {
@@ -331,6 +303,44 @@ function init(items = 12) {
   }
 }
 
+function turnCards(delay, card, card_front, card_back) {
+  // console.log(delay);
+  setTimeout(() => {
+    card_front.forEach((c) => {
+      c.classList.add("card--front_active");
+    }); //for each card add the turning animation to the front of the card.
+    card_back.forEach((c) => {
+      c.classList.add("card--back_active");
+    }); //for each card add the turning animation to the back of the card.
+    setTimeout(() => {
+      card_front.forEach((c) => {
+        c.classList.remove("card--front_active");
+      }); //for each card remove the turning animation to the front of the card.
+      card_back.forEach((c) => {
+        c.classList.remove("card--back_active");
+      }); //for each card remove the turning animation to the back of the card.
+      setTimeout(() => {
+        card.forEach((card) => {
+          card.disabled = false; //make the card clickable again
+          card.classList.remove("disabled"); //remove the not-allowed css property from the card.
+          setTimeout(() => {
+            let allbtn = document.querySelectorAll(".btn");
+            allbtn.forEach((btn) => {
+              btn.classList.remove("disabled");
+              btn.disabled = false;
+            }, 3500); //after first delay this second delay callback :- makes each card clickable again
+          });
+        });
+      }, 500);
+      swoosh.play();
+    }, delay);
+    card.forEach((card) => {
+      card.disabled = true;
+      card.classList.add("disabled");
+    });
+  }, 500); //disable every card
+}
+
 function easyMode(elements) {
   mode.play();
   elements = 12;
@@ -353,7 +363,8 @@ function disableSpam() {
     btn.disabled = "true";
     btn.classList.add("disabled");
   });
-}
+} //this function prevents the user from continuously clicking a button to reset or change
+//the mode after clicking the button first time i.e delay between clicks
 //END OF FUNCTIONS
 
 //EVENT HANDLERS
