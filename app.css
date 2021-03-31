@@ -240,7 +240,8 @@ body {
 }
 
 .btn--easy {
-  background-color: #26c6da;
+  background-color: #d500f9;
+  color: #ccc;
 }
 .btn--hard {
   background-color: #dd2c00;
