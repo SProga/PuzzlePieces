@@ -98,14 +98,13 @@ body {
 }
 .card--front_active {
   transform: rotateY(-180deg);
-  background: rgb(220, 220, 220);
+  background: rgb(248, 248, 248);
 }
 
 .card--back_active {
   transform: rotateY(0);
-  background: rgb(220, 220, 220);
+  background: rgb(248, 248, 248);
 }
-
 .center,
 .scorecard {
   width: 55%;
@@ -130,7 +129,7 @@ body {
   flex: 1 0 100%;
 }
 
-.btn {
+.btn--reset {
   display: inline-block;
   margin-right: auto;
   height: 10rem;
@@ -154,17 +153,17 @@ body {
   font-family: sans-serif;
 }
 
-.btn:hover {
+.btn--reset:hover {
   background: linear-gradient(
     to right,
     rgba(194, 6, 97, 0.883),
     #f6812de8
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.btn:focus {
+.btn--reset:focus {
   outline: none;
 }
-.btn:active {
+.btn--reset:active {
   transform: translateY(2px);
   box-shadow: 0 5px 5px rgb(15, 15, 15);
 }
@@ -278,6 +277,10 @@ body {
   cursor: pointer;
 }
 
+.disabled {
+  cursor: not-allowed;
+}
+
 @media only screen and (min-width: 1600px) {
   .game-board {
     width: 50%;
@@ -291,6 +294,7 @@ body {
 
 @media only screen and (max-width: 1200px) {
   .center {
+    position: relative;
     width: 100%;
     flex-direction: column;
     align-items: center;
@@ -311,22 +315,20 @@ body {
     flex: 0 0 17%;
   }
 
-  .btn {
-    transform: translateX(160%);
+  .btn--reset {
+    position: absolute;
+    top: 0;
+    left: 40%;
+    transform: translateX(0);
+  }
+
+  .settings {
+    margin-right: 0;
+    margin: 15rem auto 0;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  .center {
-    position: relative;
-  }
-
-  .btn {
-    transform: translateX(160%);
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-
   .scorecard {
     flex-direction: column;
     gap: 2rem;
@@ -349,17 +351,13 @@ body {
   .center {
     position: relative;
   }
-  .btn {
+  .btn--reset {
     position: absolute;
     top: 0;
     left: 37.5%;
     transform: translateX(0);
   }
 
-  .settings {
-    margin-right: 0;
-    margin: 15rem auto 0;
-  }
   .fa-volume-mute,
   .fa-volume-up {
     top: 3rem;

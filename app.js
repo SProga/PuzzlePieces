@@ -15,29 +15,33 @@ const heartImgs = [
   "imgs/sprite_h3.png",
 ];
 const imgArr = [
-  "png/036-ice cream stick.png",
+  "png/036-icecreamstick.png",
   "png/001-gift.png",
   "png/002-pizza.png",
-  "png/003-firecracker.png",
-  "png/010-disco ball.png",
+  "png/043-speakers.png",
+  "png/015-chat.png",
   "png/004-confetti.png",
   "png/007-piñata.png",
-  "png/008-silly strings.png",
   "png/041-lollipop.png",
   "png/049-burger.png",
   "png/038-crown.png",
-  "png/034-shaker.png",
-  "png/035-bunny ears.png",
   "png/045-barbecue.png",
   "png/030-doughnut.png",
   "png/032-microphone.png",
-  "png/024-dress.png",
   "png/009-synthesizer.png",
   "png/031-taco.png",
   "png/040-bell.png",
   "png/022-birthday cake.png",
   "png/016-lemonade.png",
   "png/013-clock.png",
+  "png/027-photocamera.png",
+  "pngCraft/049-knitting.png",
+  "pngCraft/035-origami.png",
+  "pngCraft/031-pliers.png",
+  "pngCraft/013-handsaw.png",
+  "pngCraft/038-hatchet.png",
+  "pngCraft/032-toolkit.png",
+  "pngCraft/003-liquidglue.png",
 ];
 
 //AUDIO GLOBALS
@@ -245,6 +249,7 @@ function init(items = 12) {
   const card_back = document.querySelectorAll(".card--back");
 
   if (elements > 6) {
+    //CALLBACK HELLLLLLLLLLLLLLLLLL NEEDS TO BE REFACTORED
     setTimeout(() => {
       card_front.forEach((c) => {
         c.classList.add("card--front_active");
@@ -262,14 +267,21 @@ function init(items = 12) {
         setTimeout(() => {
           card.forEach((card) => {
             card.disabled = false;
-            // console.log(card);
+            card.classList.remove("disabled");
+            setTimeout(() => {
+              let allbtn = document.querySelectorAll(".btn");
+              allbtn.forEach((btn) => {
+                btn.classList.remove("disabled");
+                btn.disabled = false;
+              }, 3500);
+            });
           });
         }, 500);
         swoosh.play();
       }, 1500);
       card.forEach((card) => {
         card.disabled = true;
-        // console.log(card);
+        card.classList.add("disabled");
       });
     }, 500);
   } //only do this for harder modes
@@ -331,14 +343,22 @@ function expertMode(elements) {
   return elements;
 }
 
+function disableSpam() {
+  const allbtn = document.querySelectorAll(".btn");
+  allbtn.forEach((btn) => {
+    btn.disabled = "true";
+    btn.classList.add("disabled");
+  });
+}
 //END OF FUNCTIONS
 
 //EVENT HANDLERS
-let lifelines = "";
+let lifelines = 3;
 let easybtn = document.querySelector(".btn--easy");
 easybtn.addEventListener("click", () => {
   prevSettings = easyMode();
   lifelines = 3;
+  disableSpam();
   return resetAll(prevSettings, lifelines);
 });
 
@@ -346,17 +366,20 @@ let hardbtn = document.querySelector(".btn--hard");
 hardbtn.addEventListener("click", () => {
   prevSettings = hardMode();
   lifelines = 5;
+  disableSpam();
   return resetAll(prevSettings, lifelines);
 });
 let expertbtn = document.querySelector(".btn--expert");
 expertbtn.addEventListener("click", () => {
   prevSettings = expertMode();
   lifelines = 7;
+  disableSpam();
   return resetAll(prevSettings, lifelines);
 });
-let resetbtn = document.querySelector(".btn");
+let resetbtn = document.querySelector(".btn--reset");
 resetbtn.addEventListener("click", () => {
-  return resetAll(prevSettings);
+  disableSpam();
+  return resetAll(prevSettings, lifelines);
 });
 
 vol.addEventListener("click", () => {
