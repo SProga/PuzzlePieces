@@ -24,7 +24,7 @@ body {
 }
 
 .game-board {
-  width: 55%;
+  width: 5000%;
   margin: 2rem auto 0;
   display: flex;
   gap: 2.1rem;
