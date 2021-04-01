@@ -35,13 +35,11 @@ body {
   width: 70%;
   margin: 2rem auto 0;
   display: flex;
-  gap: 2rem;
   justify-content: center;
   align-content: flex-start;
   flex-wrap: wrap;
   height: auto;
   padding: 5rem;
-  /* min-height: 45rem; */
 }
 
 .card {
@@ -61,6 +59,7 @@ body {
   overflow: hidden;
   min-width: 10rem;
   transition: transform 1s;
+  margin: 1rem;
 }
 .card:focus {
   outline: none;
@@ -405,6 +404,7 @@ body {
   .card {
     flex: 0 0 14%;
     height: 11.5rem;
+
     /* max-width: 30rem; */
   }
 }
@@ -430,6 +430,7 @@ body {
   }
   .card {
     flex: 0 0 17%;
+    margin: 0.5rem;
   }
 
   .btn--reset {
