@@ -85,7 +85,7 @@ let loseheart = new Howl({
 });
 
 let playstate = new Howl({
-  src: ["sounds/idea.ogg"],
+  src: ["sounds/idea.mp3"],
   volume: 1,
   loop: true,
 });
