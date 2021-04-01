@@ -183,7 +183,7 @@ function updateScore(scorekeeper, el) {
     won.play();
   }
 
-  score.innerHTML = "Score: " + scorekeeper;
+  score.innerHTML = "Score:" + scorekeeper;
 }
 
 function updateAccuracy() {
