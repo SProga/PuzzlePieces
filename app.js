@@ -200,7 +200,7 @@ function updateAccuracy() {
   numRatio = totalCorrect / total;
   percentage = numRatio * 100;
   percentage_floor = Math.floor(percentage);
-  accuracy.innerHTML = "Accuracy: " + percentage_floor + "%";
+  accuracy.innerHTML = "Accuracy:" + percentage_floor + "%";
 }
 
 function reset(card, boardItems) {
@@ -264,7 +264,7 @@ function resetAll(prevSettings, lifelines) {
   totalCorrect = 0;
   time = 0;
   tm = 0;
-  accuracy.innerHTML = "Accuracy: " + totalCorrect + "%";
+  accuracy.innerHTML = "Accuracy:" + totalCorrect + "%";
 }
 
 function init(items = 12) {
