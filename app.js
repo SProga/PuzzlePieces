@@ -194,7 +194,7 @@ function updateAccuracy() {
   let percentage = "";
   let percentage_floor = "";
 
-  console.log(total);
+  // console.log(total); //testing purposes
 
   if (correct === true) {
     totalCorrect++;
