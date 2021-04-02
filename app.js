@@ -1,3 +1,5 @@
+"use strict";
+
 //GLOBALS
 let scorekeeper = 0;
 let count = 0;
@@ -150,7 +152,7 @@ function populateBoard(elements) {
 
 function populateImages(board, elements) {
   const img_back = document.querySelectorAll(".item-back");
-
+  let card_location = null;
   //we do it twice the amount because it is a 2d array.
   for (let i = 0; i < elements; i++) {
     for (let k = 0; k < 2; k++) {
