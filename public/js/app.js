@@ -270,6 +270,7 @@ function resetAll(prevSettings, lifelines) {
 }
 
 function init(items = 12) {
+  disableSpam();
   for (let i = 0; i < totalLives; i++) {
     let img = document.createElement("IMG");
     img.classList.add("lifelines");

@@ -22,10 +22,15 @@ body {
   margin: 0;
   padding: 0;
   /* background-image: url(https://media.giphy.com/media/BHNfhgU63qrks/giphy.gif); */
-  background-image: url(https://media.giphy.com/media/ZFibRNOSrIdUWgupdc/giphy.gif);
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.698),
+      rgba(0, 0, 0, 0.65)
+    ),
+    url(https://media1.giphy.com/media/H7lptYSho9ZNoFENky/giphy.gif?cid=ecf05e47olcq034m6z9xgqn9txxzck6xuv98mafav52snlch&rid=giphy.gif);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   font-family: "Train One", cursive;
   overflow-x: hidden;
   color: #ccc;
@@ -417,8 +422,6 @@ body {
   .card {
     flex: 0 0 14%;
     height: 11.5rem;
-
-    /* max-width: 30rem; */
   }
 }
 
@@ -461,23 +464,71 @@ body {
 
 @media only screen and (max-width: 50em) {
   .scorecard {
-    flex-direction: column;
-    gap: 2rem;
+    width: 90%;
   }
   .fa-volume-mute,
   .fa-volume-up {
-    top: 3rem;
-    right: -2rem;
+    top: 7rem;
+    right: 2rem;
+  }
+  .game-board {
+    width: 95%;
+    gap: 1rem;
+    padding: 5rem 0;
+  }
+  .card {
+    flex: 0 0 12%;
+    min-width: unset;
+    border-radius: 0;
+    height: 7.5rem;
+  }
+  .card--front {
+    border-radius: 1rem;
+  }
+  .card--back {
+    border-radius: 1rem;
   }
 }
 
 @media only screen and (max-width: 31.25em) {
+  .scorecard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .lives {
+    align-self: flex-end;
+  }
+  .lifelines {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+  .update {
+    order: 1;
+    font-size: 1rem;
+  }
+  .fa-volume-mute,
+  .fa-volume-up {
+    top: 4rem;
+    right: 1rem;
+    font-size: 4rem;
+  }
+
   .game-board {
-    width: 90%;
+    width: 95%;
     gap: 1rem;
+    padding: 5rem 0;
   }
   .card {
-    flex: 0 0 33%;
+    flex: 0 0 17%;
+    min-width: 4rem;
+    border-radius: 0;
+    height: 5.8rem;
+  }
+  .card--front {
+    border-radius: 1rem;
+  }
+  .card--back {
+    border-radius: 1rem;
   }
   .center {
     position: relative;
@@ -489,25 +540,17 @@ body {
     transform: translateX(0);
   }
 
-  .fa-volume-mute,
-  .fa-volume-up {
-    top: 3rem;
-    right: 0;
-  }
-
   .title {
     display: flex;
     letter-spacing: 2px;
     align-items: center;
     gap: 0;
     text-align: center;
-    font-size: 7rem;
+    font-size: 3rem;
     justify-content: center;
     text-shadow: 0 2px 2px #000;
   }
-  .fa-volume-mute,
-  .fa-volume-up {
-    top: 11rem;
-    right: -2rem;
+  .accuracy {
+    font-size: 2rem;
   }
 }
