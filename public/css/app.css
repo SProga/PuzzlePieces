@@ -477,7 +477,7 @@ body {
     padding: 5rem 0;
   }
   .card {
-    flex: 0 0 20%;
+    flex: 0 0 16%;
     min-width: unset;
     border-radius: 0;
     height: 7.5rem;
@@ -519,7 +519,7 @@ body {
     padding: 5rem 0;
   }
   .card {
-    flex: 0 0 17%;
+    flex: 0 0 20%;
     min-width: 4rem;
     border-radius: 0;
     height: 5.8rem;
