@@ -442,11 +442,10 @@ body {
     width: 80%;
     height: auto;
     flex-wrap: wrap;
-    gap: 3rem;
   }
   .card {
     flex: 0 0 17%;
-    margin: 0.5rem;
+    margin: 1rem;
   }
 
   .btn--reset {
@@ -473,7 +472,7 @@ body {
   }
   .game-board {
     width: 95%;
-    gap: 1rem;
+    margin: 1rem;
     padding: 5rem 0;
   }
   .card {
@@ -515,7 +514,6 @@ body {
 
   .game-board {
     width: 95%;
-    gap: 1rem;
     padding: 5rem 0;
   }
   .card {
