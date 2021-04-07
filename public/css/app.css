@@ -62,6 +62,11 @@ body {
   min-width: 10rem;
   transition: transform 1s;
   margin: 1rem;
+  -o-object-position: center;
+     object-position: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
 }
 .card:focus {
   outline: none;
