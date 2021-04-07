@@ -266,29 +266,29 @@ body {
 }
 
 .btn--easy {
-  background-color: #1173f3;
+  background-color: #0559c7;
   box-shadow: 0 3px 3px #6da8f5;
   color: #ccc;
 }
 .btn--hard {
-  background-color: #dd2c00;
+  background-color: #b32603;
   box-shadow: 0 3px 3px #d67a63;
   color: #ccc;
 }
 .btn--expert {
-  background-color: #1de9b6;
+  background-color: #05b98c;
   box-shadow: 0 3px 3px #7be0c7;
   color: black;
 }
 
 .btn--easy:hover {
-  background-color: #0c52ad;
+  background-color: #094695;
 }
 .btn--hard:hover {
-  background-color: #a52303;
+  background-color: #871d02;
 }
 .btn--expert:hover {
-  background-color: #0a8d6c;
+  background-color: #037357;
 }
 
 .settings__mode {
