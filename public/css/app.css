@@ -415,12 +415,8 @@ body {
   width: 100%;
 }
 
-input,
-textarea,
-button,
-select,
-a {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media only screen and (min-width: 100em) {
