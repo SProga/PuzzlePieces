@@ -51,16 +51,13 @@ body {
   cursor: pointer;
   flex: 0 0 13%;
   position: relative;
-  perspective: 150rem;
-  -moz-perspective: 150rem;
+  perspective: 250rem;
+  -moz-perspective: 250rem;
   height: 12rem;
   border: none;
   outline: none;
   border-radius: 2rem;
   background: transparent;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
   overflow: hidden;
   min-width: 10rem;
   transition: transform 1s;
