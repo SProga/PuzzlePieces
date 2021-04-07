@@ -263,7 +263,7 @@ body {
 .btn--expert:active {
   opacity: 0.8;
   transform: translateY(2px);
-  box-shadow: 0 2px 2px rgb(126, 125, 125);
+  box-shadow: 0 2px 2px rgb(87, 87, 87);
 }
 
 .btn--easy {
