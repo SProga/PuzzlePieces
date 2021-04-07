@@ -57,7 +57,7 @@ body {
   border: none;
   outline: none;
   border-radius: 2rem;
-  background: currentColor;
+  background: transparent;
   overflow: hidden;
   min-width: 10rem;
   transition: transform 1s;
