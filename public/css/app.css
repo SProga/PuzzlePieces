@@ -276,9 +276,9 @@ body {
   color: #ccc;
 }
 .btn--expert {
-  background-color: #05b98c;
+  background-color: #05936f;
   box-shadow: 0 3px 3px #7be0c7;
-  color: black;
+  color: #ccc;
 }
 
 .btn--easy:hover {
@@ -289,6 +289,7 @@ body {
 }
 .btn--expert:hover {
   background-color: #037357;
+  color: #ccc;
 }
 
 .settings__mode {
