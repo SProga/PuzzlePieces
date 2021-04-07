@@ -177,7 +177,7 @@ body {
   border-radius: 100%;
   cursor: pointer;
   border: none;
-  box-shadow: 0 5px 5px rgb(190, 140, 140);
+  box-shadow: 0 3px 3px rgb(190, 140, 140);
   transition: all 0.2s;
   font-weight: bold;
   letter-spacing: 2px;
@@ -197,7 +197,7 @@ body {
 }
 .btn--reset:active {
   transform: translateY(2px);
-  box-shadow: 0 5px 5px rgb(87, 6, 6);
+  box-shadow: 0 3px 3px rgb(87, 6, 6);
 }
 .scorecard {
   position: relative;
