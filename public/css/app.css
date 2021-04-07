@@ -244,7 +244,6 @@ body {
   padding: 1rem 2.5rem;
   font-size: 2rem;
   margin: 1rem;
-  box-shadow: 0 2px 2px rgb(100, 100, 100);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s;
@@ -253,6 +252,7 @@ body {
   letter-spacing: 2px;
   transition: background-color 0.2s;
 }
+
 .btn--easy:focus,
 .btn--hard:focus,
 .btn--expert:focus {
@@ -268,14 +268,17 @@ body {
 
 .btn--easy {
   background-color: #1173f3;
+  box-shadow: 0 2px 3px #6da8f5;
   color: #ccc;
 }
 .btn--hard {
   background-color: #dd2c00;
+  box-shadow: 0 2px 3px #d67a63;
   color: #ccc;
 }
 .btn--expert {
   background-color: #1de9b6;
+  box-shadow: 0 2px 3px #7be0c7;
   color: black;
 }
 
