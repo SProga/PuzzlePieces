@@ -263,22 +263,21 @@ body {
 .btn--expert:active {
   opacity: 0.8;
   transform: translateY(2px);
-  box-shadow: 0 2px 2px rgb(87, 87, 87);
 }
 
 .btn--easy {
   background-color: #1173f3;
-  box-shadow: 0 2px 3px #6da8f5;
+  box-shadow: 0 3px 3px #6da8f5;
   color: #ccc;
 }
 .btn--hard {
   background-color: #dd2c00;
-  box-shadow: 0 2px 3px #d67a63;
+  box-shadow: 0 3px 3px #d67a63;
   color: #ccc;
 }
 .btn--expert {
   background-color: #1de9b6;
-  box-shadow: 0 2px 3px #7be0c7;
+  box-shadow: 0 3px 3px #7be0c7;
   color: black;
 }
 
