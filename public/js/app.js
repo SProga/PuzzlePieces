@@ -88,7 +88,7 @@ let loseheart = new Howl({
 
 let playstate = new Howl({
   src: ["sounds/idea.mp3"],
-  volume: 1,
+  volume: 0.7,
   loop: true,
 });
 let vol = document.querySelector(".tg");
