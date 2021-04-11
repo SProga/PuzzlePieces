@@ -429,9 +429,8 @@ function turnCards(delay, card, card_front, card_back) {
       c.classList.add("card--front_active");
     }); //for each card add the turning animation to the front of the card.
     card_back.forEach((c) => {
-      c.style.opacity = "1";
-      c.lastChild.style.opacity = "1";
       c.classList.add("card--back_active");
+      c.style.opacity = "1";
     }); //for each card add the turning animation to the back of the card.
     setTimeout(() => {
       card_front.forEach((c) => {
@@ -456,7 +455,7 @@ function turnCards(delay, card, card_front, card_back) {
           }, 1000);
         }, 500);
         countdowntxt.classList.add("fadeOut");
-      }, 500);
+      }, 800);
       swoosh.play();
       countdowntxt.innerHTML = "GO !";
       countdowntxt.style.color = "#64FFDA";
