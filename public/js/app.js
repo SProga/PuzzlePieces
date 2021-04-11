@@ -53,10 +53,41 @@ const imgArr = [
   "pngCraft/003-liquidglue.png",
 ];
 
+const mobileArr = [
+  "mobile/png/036-icecreamstick-small.png",
+  "mobile/png/001-gift-small.png",
+  "mobile/png/002-pizza-small.png",
+  "mobile/png/043-speakers-small.png",
+  "mobile/png/015-chat-small.png",
+  "mobile/png/004-confetti-small.png",
+  "mobile/png/007-piñata-small.png",
+  "mobile/png/041-lollipop-small.png",
+  "mobile/png/049-burger-small.png",
+  "mobile/png/038-crown-small.png",
+  "mobile/png/045-barbecue-small.png",
+  "mobile/png/030-doughnut-small.png",
+  "mobile/png/032-microphone-small.png",
+  "mobile/png/009-synthesizer-small.png",
+  "mobile/png/031-taco-small.png",
+  "mobile/png/040-bell-small.png",
+  "mobile/png/022-birthday cake-small.png",
+  "mobile/png/016-lemonade-small.png",
+  "mobile/png/013-clock-small.png",
+  "mobile/png/027-photocamera-small.png",
+  "mobile/pngCraft/049-knitting-small.png",
+  "mobile/pngCraft/035-origami-small.png",
+  "mobile/pngCraft/031-pliers-small.png",
+  "mobile/pngCraft/013-handsaw-small.png",
+  "mobile/pngCraft/038-hatchet-small.png",
+  "mobile/pngCraft/032-toolkit-small.png",
+  "mobile/pngCraft/003-liquidglue-small.png",
+];
+
 //AUDIO GLOBALS
 let won = new Howl({
   src: ["sounds/congrats.mp3"],
   volume: 1,
+  preload: false,
 });
 
 let sound = new Howl({
@@ -80,16 +111,19 @@ let swoosh = new Howl({
 let fail = new Howl({
   src: ["sounds/fail.mp3"],
   volume: 1,
+  preload: false,
 });
 let loseheart = new Howl({
   src: ["sounds/lose_heart.mp3"],
   volume: 0.7,
+  preload: false,
 });
 
 let playstate = new Howl({
   src: ["sounds/idea.mp3"],
   volume: 0.7,
   loop: true,
+  preload: false,
 });
 let vol = document.querySelector(".tg");
 
@@ -114,6 +148,7 @@ function removelife() {
     }, 1000);
     setTimeout(function () {
       removed.src = heartImgs[2]; //after the second second show image 2
+      loseheart.load();
       loseheart.play();
       notice.classList.remove("fadeUp");
 
@@ -139,9 +174,12 @@ function populateBoard(elements) {
     cardback.classList.add("card--back");
     let img_front = document.createElement("IMG");
     img_front.src = "imgs/bg2.jpg";
+    img_front.srcset = "imgs/bg2.jpg 1x, imgs/bg2-small.jpg 2x";
+    img_front.alt = `front of card ${i}`;
     img_front.classList.add("item-front");
     let img_back = document.createElement("IMG");
     img_back.classList.add("item-back");
+    img_front.alt = `back of card ${i}`;
     cardfront.appendChild(img_front);
     cardback.appendChild(img_back);
     newDiv.appendChild(cardfront);
@@ -154,9 +192,11 @@ function populateImages(board, elements) {
   const img_back = document.querySelectorAll(".item-back");
   let card_location = null;
   //we do it twice the amount because it is a 2d array.
+
   for (let i = 0; i < elements; i++) {
     for (let k = 0; k < 2; k++) {
       card_location = board[i][1];
+
       img_back[card_location].src = `../imgs/${board[i][0]}`;
     }
   }
@@ -182,6 +222,7 @@ function updateScore(scorekeeper, el) {
     playstate.volume(0);
     let wonBanner = document.querySelector(".game_notice--won");
     wonBanner.innerHTML = "YOU WON!";
+    won.load();
     won.play();
   }
 
@@ -216,6 +257,7 @@ function reset(card, boardItems) {
         playstate.volume(vol);
       }, 3000);
       playstate.volume(0);
+      fail.load();
       fail.play();
       let lostBanner = document.querySelector(".game_notice--lost");
       lostBanner.innerHTML = "YOU LOST!";
@@ -300,9 +342,18 @@ function init(items = 12) {
     } while (exist);
     random.push(rand);
 
-    for (let k = 0; k < 2; k++) {
-      board_location.push([imgArr[rand], arr[counter]]);
-      counter++;
+    let screenWidth = window.innerWidth;
+    if (screenWidth < 768) {
+      console.log("currently in mobile setup");
+      for (let k = 0; k < 2; k++) {
+        board_location.push([mobileArr[rand], arr[counter]]);
+        counter++;
+      }
+    } else {
+      for (let k = 0; k < 2; k++) {
+        board_location.push([imgArr[rand], arr[counter]]);
+        counter++;
+      }
     }
   }
 
@@ -378,6 +429,8 @@ function turnCards(delay, card, card_front, card_back) {
       c.classList.add("card--front_active");
     }); //for each card add the turning animation to the front of the card.
     card_back.forEach((c) => {
+      c.style.opacity = "1";
+      c.lastChild.style.opacity = "1";
       c.classList.add("card--back_active");
     }); //for each card add the turning animation to the back of the card.
     setTimeout(() => {
@@ -489,6 +542,7 @@ vol.addEventListener("click", () => {
   } else {
     vol.classList.add("fa-volume-up");
     vol.classList.remove("fa-volume-mute");
+    playstate.load();
     playstate.play();
   }
 });

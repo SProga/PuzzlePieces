@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const ejsMate = require("ejs-mate");
+const compression = require("compression");
 
+app.use(compression());
 app.use(express.static(path.join(__dirname, "utils")));
 app.use(express.static(path.join(__dirname, "public")));
 app.engine("ejs", ejsMate);
