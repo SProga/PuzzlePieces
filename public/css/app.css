@@ -186,14 +186,12 @@ body {
   z-index: 999;
 }
 
-@media (hover: hover) {
-  .btn--reset:hover {
-    background: linear-gradient(
-      to right,
-      rgba(194, 6, 97, 0.883),
-      #f6812de8
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
+.btn--reset:hover {
+  background: linear-gradient(
+    to right,
+    rgba(194, 6, 97, 0.883),
+    #f6812de8
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .btn--reset:focus {
   outline: none;
