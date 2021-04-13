@@ -94,7 +94,6 @@ body {
 }
 
 .card--back {
-  visibility: hidden;
   transform: rotateY(180deg);
   background-color: rgb(200, 200, 200);
 }

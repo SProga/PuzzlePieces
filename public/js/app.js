@@ -398,7 +398,7 @@ function init(items = 12) {
             card.isPair = true;
             setTimeout(() => {
               card.parentNode.classList.remove("scale");
-            }, 1000);
+            }, 500);
           });
           setTimeout(() => {
             sound.play();
@@ -444,7 +444,6 @@ async function turnCards(delay, card, card_front, card_back) {
     }); //for each card add the turning animation to the front of the card.
     card_back.forEach((c) => {
       c.classList.add("card--back_active");
-      c.style.visibility = "visible";
     }); //for each card add the turning animation to the back of the card.
     card.forEach((card) => {
       card.disabled = true;
