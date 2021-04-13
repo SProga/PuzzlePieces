@@ -295,6 +295,8 @@ function resetAll(prevSettings, lifelines) {
   updateScore(scorekeeper, prevSettings);
   count = 0;
   sameItem = [];
+  time = 0;
+  tm = 0;
   init(prevSettings);
   mode.play();
   let notice = document.querySelector(".last_notice");
@@ -306,8 +308,6 @@ function resetAll(prevSettings, lifelines) {
   lostBanner.innerHTML = "";
   numMoves = 0;
   totalCorrect = 0;
-  time = 0;
-  tm = 0;
   accuracy.innerHTML = "Accuracy:" + totalCorrect + "%";
 }
 
@@ -344,7 +344,7 @@ function init(items = 12) {
 
     let screenWidth = window.innerWidth;
     if (screenWidth < 768) {
-      console.log("currently in mobile setup");
+      // console.log("currently in mobile setup");
       for (let k = 0; k < 2; k++) {
         board_location.push([mobileArr[rand], arr[counter]]);
         counter++;
@@ -423,51 +423,68 @@ function init(items = 12) {
   }
 }
 
-function turnCards(delay, card, card_front, card_back) {
-  setTimeout(() => {
+const timer = (delay, value) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  }).then(function () {
+    value();
+  });
+};
+
+async function turnCards(delay, card, card_front, card_back) {
+  //Step 1
+  //3500
+  let floorTime = delay / 1000;
+  time = Math.floor(floorTime);
+  tm = setInterval(countDown, 1000);
+
+  await timer(500, () => {
     card_front.forEach((c) => {
       c.classList.add("card--front_active");
     }); //for each card add the turning animation to the front of the card.
     card_back.forEach((c) => {
       c.classList.add("card--back_active");
-      c.style.opacity = "1";
+      c.style.visibility = "visible";
     }); //for each card add the turning animation to the back of the card.
-    setTimeout(() => {
-      card_front.forEach((c) => {
-        c.classList.remove("card--front_active");
-      }); //for each card remove the turning animation to the front of the card.
-      card_back.forEach((c) => {
-        c.classList.remove("card--back_active");
-      }); //for each card remove the turning animation to the back of the card.
-      setTimeout(() => {
-        card.forEach((card) => {
-          card.disabled = false; //make the card clickable again
-          card.classList.remove("disabled"); //remove the not-allowed css property from the card.
-          let allbtn = document.querySelectorAll(".btn");
-          allbtn.forEach((btn) => {
-            btn.classList.remove("disabled");
-            btn.disabled = false;
-          }); //after first delay this second delay callback :- makes each card clickable again
-          setTimeout(() => {
-            countdowntxt.innerHTML = "";
-            countdowntxt.classList.remove("fadeOut");
-            countdowntxt.style.removeProperty("color");
-          }, 1000);
-        }, 500);
-        countdowntxt.classList.add("fadeOut");
-      }, 800);
-      swoosh.play();
-      countdowntxt.innerHTML = "GO !";
-      countdowntxt.style.color = "#64FFDA";
-    }, delay);
     card.forEach((card) => {
       card.disabled = true;
       card.classList.add("disabled");
     });
-    let floorTime = delay / 1000;
-    time = Math.floor(floorTime);
-    tm = setInterval(countDown, 1000);
-  }, 500); //disable every card
+  });
+
+  //Step 2
+  await timer(delay - 1000, () => {
+    card_front.forEach((c) => {
+      c.classList.remove("card--front_active");
+    }); //for each card remove the turning animation to the front of the card.
+    card_back.forEach((c) => {
+      c.classList.remove("card--back_active");
+    }); //for each card remove the turning animation to the back of the card.
+    swoosh.play();
+    countdowntxt.innerHTML = "GO !";
+    countdowntxt.style.color = "#64FFDA";
+  });
+
+  //Step 3
+  await timer(500, () => {
+    card.forEach((card) => {
+      card.disabled = false; //make the card clickable again
+      card.classList.remove("disabled"); //remove the not-allowed css property from the card.
+      let allbtn = document.querySelectorAll(".btn");
+      allbtn.forEach((btn) => {
+        btn.classList.remove("disabled");
+        btn.disabled = false;
+      }); //after first delay this second delay callback :- makes each card clickable again
+    });
+    countdowntxt.classList.add("fadeOut");
+  });
+
+  //Step 4
+  await timer(500, () => {
+    countdowntxt.innerHTML = "";
+    countdowntxt.classList.remove("fadeOut");
+    countdowntxt.style.removeProperty("color");
+  });
 }
 
 function easyMode(elements) {
@@ -496,7 +513,7 @@ function disableSpam() {
 //the mode after clicking the button first time i.e delay between clicks
 function countDown() {
   time--;
-  if (time == 0) {
+  if (time == 1) {
     clearInterval(tm);
   }
   countdowntxt.innerHTML = time;

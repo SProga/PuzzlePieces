@@ -94,7 +94,7 @@ body {
 }
 
 .card--back {
-  opacity: 0;
+  visibility: hidden;
   transform: rotateY(180deg);
   background-color: rgb(200, 200, 200);
 }
@@ -180,7 +180,6 @@ body {
   cursor: pointer;
   border: none;
   box-shadow: 0 3px 3px rgb(190, 140, 140);
-  transition: all 0.2s;
   font-weight: bold;
   letter-spacing: 2px;
   font-family: sans-serif;
