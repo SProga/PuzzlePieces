@@ -259,6 +259,16 @@ function reset(card, boardItems) {
       playstate.volume(0);
       fail.load();
       fail.play();
+      let allCards = document.querySelectorAll(".card");
+
+      allCards.forEach((card) => {
+        if (!card.lastChild.classList.contains("card--back_active")) {
+          card.firstChild.classList.add("card--front_active");
+          card.lastChild.classList.add("card--back_active");
+          swoosh.play();
+        }
+        allCards = null;
+      });
       let lostBanner = document.querySelector(".game_notice--lost");
       lostBanner.innerHTML = "YOU LOST!";
     } else {
