@@ -14,7 +14,7 @@ body {
 
 h1 {
   font-size: 4rem;
-  color: #ccc;
+  color: rgb(235, 233, 233);
 }
 
 .wrapper {
@@ -28,7 +28,7 @@ h1 {
   display: inline-block;
   padding: 1rem 2rem;
   text-decoration: none;
-  color: #ccc;
+  color: rgb(236, 235, 235);
   background-color: #1976d2;
   border-radius: 1rem;
   font-size: 2rem;
@@ -37,4 +37,9 @@ h1 {
 }
 .btn:hover {
   background-color: #0f4881;
+}
+.glass {
+  background-color: rgba(158, 154, 154, 0.637);
+  border-radius: 15px;
+  padding: 2rem 0;
 }
