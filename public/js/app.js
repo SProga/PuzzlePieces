@@ -1,10 +1,10 @@
 "use strict";
 
 //GLOBALS
-let scorekeeper = 0;
+let scorekeeper = 0; //keep track of how many pairs are found
 let count = 0;
-let sameItem = [];
-let prevSettings = 12;
+let sameItem = []; //initialize the array that will hold a pair of cards
+let prevSettings = 12; //initialize the state of the cards to be 12
 let elements = "";
 let totalLives = 3;
 let score = document.querySelector(".score");
@@ -53,6 +53,7 @@ const imgArr = [
   "pngCraft/003-liquidglue.png",
 ];
 
+//strictly for viewports less than 780px
 const mobileArr = [
   "mobile/png/036-icecreamstick-small.png",
   "mobile/png/001-gift-small.png",
@@ -128,13 +129,6 @@ let playstate = new Howl({
 let vol = document.querySelector(".tg");
 
 //FUNCTIONS
-function countDown() {
-  n--;
-  if (n == 0) {
-    clearInterval(tm);
-  }
-  console.log(n);
-}
 
 function removelife() {
   totalLives--; //take one from the total lives
@@ -163,6 +157,12 @@ function removelife() {
   }
 }
 
+/***
+ /**
+ * @param {number} 
+ * 
+ *  args the elements passed in is the number of cards on the board
+ */
 function populateBoard(elements) {
   let game_board = document.querySelector(".game-board");
   for (let i = 0; i < elements; i++) {
@@ -197,7 +197,7 @@ function populateImages(board, elements) {
     for (let k = 0; k < 2; k++) {
       card_location = board[i][1];
 
-      img_back[card_location].src = `../imgs/${board[i][0]}`;
+      img_back[card_location].src = `../imgs/${board[i][0]}`; //set that indexlocation to the image stored in the 2d array
     }
   }
 }
@@ -520,6 +520,8 @@ function disableSpam() {
   });
 } //this function prevents the user from continuously clicking a button to reset or change
 //the mode after clicking the button first time i.e delay between clicks
+
+//time function called in the init function to countdown the time before the game begins
 function countDown() {
   time--;
   if (time == 1) {
