@@ -184,13 +184,23 @@ body {
   font-family: sans-serif;
   z-index: 999;
 }
-@media only screen and (hover: hover) {
+@media only screen and (hover: hover) and (pointer: fine) {
   .btn--reset:hover {
     background: linear-gradient(
       to right,
       rgba(194, 6, 97, 0.883),
       #f6812de8
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  .btn--easy:hover {
+    background-color: #094695;
+  }
+  .btn--hard:hover {
+    background-color: #871d02;
+  }
+  .btn--expert:hover {
+    background-color: #037357;
+    color: #ccc;
   }
 }
 
@@ -280,17 +290,6 @@ body {
 .btn--expert {
   background-color: #05936f;
   box-shadow: 0 3px 3px #7be0c7;
-  color: #ccc;
-}
-
-.btn--easy:hover {
-  background-color: #094695;
-}
-.btn--hard:hover {
-  background-color: #871d02;
-}
-.btn--expert:hover {
-  background-color: #037357;
   color: #ccc;
 }
 
