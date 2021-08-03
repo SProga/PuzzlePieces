@@ -3,9 +3,7 @@ const app = express();
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const compression = require("compression");
-const nocache = require("nocache");
 
-app.use(nocache());
 app.use(compression());
 app.use(express.static(path.join(__dirname, "utils")));
 app.use(express.static(path.join(__dirname, "public")));
