@@ -1,80 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Monoton&family=Train+One&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"
-      integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ=="
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="css/app.css" media="screen" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Monoton&family=Train+One&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+			integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"
+			integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ=="
+			crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" href="css/app.css" media="screen" />
 
-    <title>Puzzle Up | Puzzle Game by Shane Proverbs</title>
-  </head>
-  <body>
-    <div class="center">
-      <button class="btn btn--reset">Reset</button>
-      <div class="settings">
-        <h1 class="settings__mode">Choose Mode</h1>
-        <div class="wrapper">
-          <button class="btn btn--easy">easy</button>
-          <button class="btn btn--hard">hard</button>
-          <button class="btn btn--expert">expert</button>
-        </div>
-        <div class="countdown">
-          <h4 class="countdown__text"></h4>
-        </div>
-      </div>
-    </div>
+		<title>Puzzle Up | Puzzle Game by Shane Proverbs</title>
+	</head>
+	<body>
+		<div class="center">
+			<button class="btn btn--reset">Reset</button>
+			<div class="settings">
+				<h1 class="settings__mode">Choose Mode</h1>
+				<div class="wrapper">
+					<button class="btn btn--easy">easy</button>
+					<button class="btn btn--hard">hard</button>
+					<button class="btn btn--expert">expert</button>
+				</div>
+				<div class="countdown">
+					<h4 class="countdown__text"></h4>
+				</div>
+			</div>
+		</div>
 
-    <div class="game-board"></div>
-    <div class="game_notice-box">
-      <h3 class="game_notice--won"></h3>
-      <h3 class="game_notice--lost"></h3>
-    </div>
+		<div class="game-board"></div>
+		<div class="game_notice-box">
+			<h3 class="game_notice--won"></h3>
+			<h3 class="game_notice--lost"></h3>
+		</div>
 
-    <div class="scorecard">
-      <div class="update">
-        <h1 class="score">Score:0</h1>
-        <h1 class="accuracy">Accuracy:0%</h1>
-      </div>
+		<div class="scorecard">
+			<div class="update">
+				<h1 class="score">Score:0</h1>
+				<h1 class="accuracy">Accuracy:0%</h1>
+				<h1 class="moves">Moves: 0</h1>
+			</div>
 
-      <div class="lives"></div>
-      <h3 class="last_notice"></h3>
-      <i class="fas fa-volume-mute tg"></i>
-    </div>
-    <div class="wrapper--title">
-      <h1 class="title">Puzzle Up</h1>
-    </div>
+			<div class="lives"></div>
+			<h3 class="last_notice"></h3>
+			<i class="fas fa-volume-mute tg"></i>
+		</div>
+		<div class="wrapper--title">
+			<h1 class="title">Puzzle Up</h1>
+		</div>
 
-    <script src="js/app.js" async></script>
+		<script src="js/app.js" async></script>
 
-    <div class="centered">
-      Icons made by
-      <a href="https://www.flaticon.com/authors/bqlqn" title="bqlqn">bqlqn</a>
-      from
-      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-      <br />Icons made by
-      <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
-      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+		<div class="centered">
+			Icons made by
+			<a href="https://www.flaticon.com/authors/bqlqn" title="bqlqn">bqlqn</a>
+			from
+			<a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+			<br />Icons made by
+			<a href="https://www.freepik.com" title="Freepik">Freepik</a> from
+			<a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
 
-      <p class="footer">
-        This game was created by and copyrighted &copy; by Shane A. Proverbs .
-        Free to play for all . All rights reserved
-      </p>
-    </div>
-  </body>
+			<p class="footer">
+				This game was created by and copyrighted &copy; by Shane A. Proverbs .
+				Free to play for all . All rights reserved
+			</p>
+		</div>
+	</body>
 </html>
