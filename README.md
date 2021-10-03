@@ -8,4 +8,4 @@
 ☻ the game is hosted at https://guarded-wave-10055.herokuapp.com/
 
 
-<a href="https://guarded-wave-10055.herokuapp.com/"><img src="./puzzleUp.png" /><a/>
+<a href="https://guarded-wave-10055.herokuapp.com/"><img src="./puzzle.png" /><a/>
