@@ -11,4 +11,4 @@ and
 https://guarded-wave-10055.herokuapp.com/   - currently unavailable free hours up for the month of October
 
 
-<a href="https://guarded-wave-10055.herokuapp.com/"><img src="./puzzle.png" /><a/>
+<a href="https://puzzleup.herokuapp.com/"><img src="./puzzle.png" /><a/>
