@@ -7,8 +7,4 @@
  
 ☻ the game is hosted at https://puzzleup.herokuapp.com/
 
-and
-https://guarded-wave-10055.herokuapp.com/   - currently unavailable free hours up for the month of October
-
-
 <a href="https://puzzleup.herokuapp.com/"><img src="./screenshot.png" /><a/>
