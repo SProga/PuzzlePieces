@@ -5,6 +5,6 @@
 
 ⚬ the deployed node Version of the project is on the branch nodeVersion which includes code refactoring and also a few npm packages to improve performance.
  
-☻ the game is hosted at https://puzzleup.herokuapp.com/
+☻ the game is hosted at https://puzzle-up.vercel.app/
 
-<a href="https://puzzleup.herokuapp.com/"><img src="./screenshot.png" /><a/>
+<a href="https://puzzle-up.vercel.app/"><img src="./screenshot.png" /><a/>
